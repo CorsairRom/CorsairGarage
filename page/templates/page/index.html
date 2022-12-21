@@ -1,0 +1,214 @@
+{% extends 'page/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+<!-- carousel -->
+<div class="container">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner rounded-3">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <div class="row">
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/ajustezx600a_1.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/ajustezx600a_7.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/ajustezx600a_12.jpg' %}" class="d-block w-100 " alt="..." style="object-position: 80%;">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/ajustezx600a_16.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+        </div>
+        <div class="carousel-caption d-none d-md-block ">
+          <div class="cap text-white rounded">
+            <h5  class="d-block rounded-3">Ajuste de motor
+            </h5>
+            <p  class="d-block rounded-3"><strong>Completa
+                reconstruccion de motor</strong> </p>
+            
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="10000">
+        <div class="row">
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/carburacion2.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/gpz600_2.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/katana600.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+        </div>
+        <div class="carousel-caption d-none d-md-block ">
+          <div class="cap text-white rounded">
+            <h5  class="d-block rounded-3">Carburación
+            </h5>
+            <p  class="d-block rounded-3"><strong>Reparacion, preparacion, limpieza y puesta apunto</strong> </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/refresh1.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/refresh2.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+          <div class="col px-1">
+            <img src="{% static 'img/carousel/refresh3.jpg' %}" class="d-block w-100 " alt="...">
+          </div>
+        </div>
+        <div class="carousel-caption d-none d-md-block ">
+          <div class="cap text-white rounded">
+            <h5  class="d-block rounded-3">Refresh Kit
+            </h5>
+            <p  class="d-block rounded-3"><strong>Devolvemos la fuerza a tu motor</strong> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<!-- end carousel -->
+
+<div class="container text-center my-4">
+  <h1 class="title-ab "><span class="span__line">Taller de Motos</span></h1>
+</div>
+
+  <div class="contenedor">
+    <div class="card-img">
+      <div class="image-data">
+        <div class="background-image" style="background-image: url('{% static "img/cards/r15_v2_1.jpg" %}')";></div>
+        <div class="publication-details">
+          <a href="#" class="author"><i class="fa-solid fa-industry"></i>Yamaha</a>
+          <span class="date"><i class="fa-solid fa-motorcycle"></i>R15 v2</span>
+
+        </div>
+      </div>
+      <div class="post-data">
+        <h1 class="title">Corsair garage</h1>
+        <h2 class="subtitle">Reconstruyendo tus sueños</h2>
+        <p class="description">
+          En Corsair Garage nos dedicamos al servicio integral en mecanica de motos, desde mantencion preventivas hasta
+          reparaciones mayores.
+          Ofrecemos un servicio totalmente personalizado, perserveramos para cumplir los plazos y ajustarnos a tu
+          presupuesto. Nuestra especialidad es en motos old school y de altas prestaciones multimarca.
+        </p>
+        <div class="cta">
+          <a href="#">Read more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  
+  <div class="contenedor">
+    <div class="card-img">
+      <div class="image-data">
+        <div class="background-image" style="background-image: url(' {% static "img/cards/importacion_1.jpg" %}')";></div>
+        <div class="publication-details">
+          <a href="#" class="author"><i class="fa-solid fa-industry"></i>Kawasaki</a>
+          <span class="date"><i class="fa-solid fa-motorcycle"></i>Klr 650</span>
+
+        </div>
+      </div>
+      <div class="post-data">
+        <h1 class="title">Importaciones</h1>
+        <h2 class="subtitle">De la fabrica a tu moto</h2>
+        <p class="description">
+          En nuestro taller nos comprometemos con todo el proceso de reparación, desde la busqueda de tu respuesto, importar e instalar segun los requerimientos del fabrica. 
+          De esta forma podemos acegurar un correcto funcionamiento y garantias igualadas a las del fabricante.
+        </p>
+        <div class="cta">
+          <a href="#">Read more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="text-center espTit">Servicios</h1>
+    <h6 class="text-center espsub">
+      Brindamos servicio de motocicletas a todas las marcas y modelos populares de motocicletas, desde motos deportivas
+      hasta, scooters y motos todoterreno. Conoce todas nuestras soluciones técnicas
+    </h6>
+    <div class="container" style="margin-bottom: 20vh;">
+      <div class="row pb-4">
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/filter.png' %}" alt="" class="icono">
+          <p>Mantención</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/tire.png' %}" alt="" class="icono">
+          <p>Neumaticos</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/brake.png' %}" alt="" class="icono">
+          <p>Frenos</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/sprocket.png' %}" alt="" class="icono">
+          <p>Transmisión</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/starter.png' %}" alt="" class="icono">
+          <p>Arranque</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/rectifier.png' %}" alt="" class="icono">
+          <p>Carga</p>
+        </div>
+      </div>
+
+      <div class="row my-4">
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/electronic.png' %}" alt="" class="icono">
+          <p>Electricidad</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/injection.png' %}" alt="" class="icono">
+          <p>Injección</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/carburetor.png' %}" alt="" class="icono">
+          <p>Carburación</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6  colpng text-center my-4">
+          <img src="{% static 'img/icons/cooling.png' %}" alt="" class="icono">
+          <p>Refrigeración</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/cluth.png' %}" alt="" class="icono">
+          <p>Embragues</p>
+        </div>
+        <div class="col-lg-2 col-md-3 col-12 col-sm-6 colpng text-center my-4">
+          <img src="{% static 'img/icons/bike.png' %}" alt="" class="icono">
+          <p>Y más..</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
