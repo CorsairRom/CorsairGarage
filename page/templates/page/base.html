@@ -1,0 +1,230 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/3dfcf40508.js" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" href="{% static 'css/style2.css'%}">
+
+  <title>Corsair Garage</title>
+</head>
+
+<body >
+
+  <!-- logo -->
+  <div class="container d-flex justify-content-center inicio">
+    <img src="{% static 'img/logocx.png' %}" alt="" class="img img-responsive" style=" max-height: 40vh;">
+  </div>
+  <!-- end logo -->
+  <!-- navbar -->
+
+
+  <div class="container-fluid menu">
+    <nav class="navbar navbar-expand-lg navbar-light my-navbar">
+      <a class="navbar-brand" href="#"><img src="{% static 'img/minilogo.png' %}" alt="Logo"
+          style=" max-height: 6vh; margin: 0px; padding: 0px;" class="rounded-pill img-responsive"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item active">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Acerca de</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="#">Servicios</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Galeria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <!-- end nav -->
+  <!-- content -->
+  <div id="bg">
+  {% block content %}
+  
+
+  
+
+  {% endblock content %}
+  </div>
+  <!-- end content -->
+
+
+  <!-- footer -->
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+        
+
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+        
+
+        
+      </section>
+      <!-- Section: Social media -->
+
+
+      <!-- Section: Text -->
+      <section class="mb-4">
+        <p>
+          Siguenos en nuestras redes sociales, y se parte de esta gran familia motera.
+        </p>
+      </section>
+      <!-- Section: Text -->
+      <hr>
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                <i class="fa-solid fa-wrench me-4"></i>Corsair Garage
+              </h6>
+              <p>
+                En nuestro taller nos preocupamos de entregar servicios de calidad y garantizado, con seguimiento y documentacion de todos nuestros trabajos para su seguridad y tranquilidad
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Servicios
+              </h6>
+              <p>
+                <a href="#!" class="text-reset">Mantención</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Ajustes</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Electrónica y Electricidad</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Importaciones</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Dátos Utiles
+              </h6>
+              <p>
+                <a href="#!" class="text-reset">Precios</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Horarios</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Garantias</a>
+              </p>
+              <p>
+                <a href="#!" class="text-reset">Sobre Nosotros</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                Contacto
+              </h6>
+              <p><i class="fas fa-home me-3"></i> Los muermos 8122, Hualpén, Concepción</p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                richard.romero@hotmail.cl
+              </p>
+              <p><i class="fas fa-phone me-3"></i> +56 973932259</p>
+              <p><i class="fa-brands fa-whatsapp me-3"></i> +56 973932259</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-white" href="">Corsair-Garage.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+
+  <!-- end footer -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        if ($(window).scrollTop() > 420) {
+          $('.my-navbar').addClass('navbar-scroll');
+        }
+        else {
+          $('.my-navbar').removeClass('navbar-scroll');
+        }
+      });
+    });
+
+  </script>
+</body>
+
+</html>
