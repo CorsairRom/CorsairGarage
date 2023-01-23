@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxLengthValidator
+from django.contrib.auth.models import User
 
 class HoraHombre(models.Model):
     nombre_hh = models.CharField(max_length=50)
@@ -10,6 +11,7 @@ class HoraHombre(models.Model):
         return self.nombre_hh
     
 class Cliente(models.Model):
+    usuario_cli = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario", null=True)
     rut_cli = models.CharField(primary_key=True, max_length=11, verbose_name="Rut")
     nombre_cli = models.CharField(max_length=50, verbose_name="Nombre")
     apellido_cli = models.CharField(max_length= 100, verbose_name="Apellido")
@@ -69,6 +71,7 @@ class Insumos(models.Model):
         return self.nombre_is
 
 class Trabajador(models.Model):
+    usuario_trab = models.ForeignKey(User, on_delete=models.CASCADE, null= True)
     rut_trab = models.CharField(primary_key=True, verbose_name="Rut", max_length=11)
     nombre_trab = models.CharField(max_length=50, verbose_name="Nombre")
     apellido_trab_pa = models.CharField(max_length= 100, verbose_name="Apellido Paterno")
