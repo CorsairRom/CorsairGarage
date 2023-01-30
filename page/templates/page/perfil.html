@@ -1,4 +1,4 @@
-{% extends 'page/base.html' %}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
 
@@ -11,7 +11,7 @@
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                 type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ingreso</button>
             <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                 type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
             <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled"
@@ -23,26 +23,75 @@
         <div class="tab-pane fade show active d-flex" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
             tabindex="0">
             <div class="col-md-4">
-                Aqui debo ver informacion de los trabajos que faltan por realizar y los tiempos que faltan para finalizar
+                Aqui debo ver informacion de los trabajos que faltan por realizar y los tiempos que faltan para
+                finalizar
             </div>
             <div class="col-md-4">
                 este es otro texto
             </div>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-            <div class="col-md-6">
-                aqui quiero ver los servicios q tengo ademas de poder filtrarlos por el nombre descriptivo
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4">
+                    <h3 class="text-center">Consultar Cliente</h3>
+                    <div class="form-floating mb-3 text-center">
+                        <input type="text" class="form-control" id="buscarCliente">
+                        <label for="buscarCliente">Cliente</label>
+                        <button class="btn btn-success mt-2" type="submit" name="btnConsultaCliente">Consultar</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Consultar Patente</h3>
+                    <form action="">
+                        <div class="form-floating mb-3 text-center">
+                            <input type="text" class="form-control" id="buscarPatente">
+                            <label for="buscarPatente">Patente</label>
+                            <button class="btn btn-success mt-2" type="submit" name="btnConsultaCliente" id="btnConsultarPatente" onclick="captureInputPatente(event)">Consultar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center" id="divPatente">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cuenta</th>
+                            <th scope="col">Patente</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">CC.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableData">
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>AA-210</td>
+                            <td>Kawasaki</td>
+                            <td>Gpz600</td>
+                            <td>600</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
             <div class="cold-md-6">
-                en esta tabs quiero poder aregar nuevos trabajos aunque deberia ser la primera pagina que por facilidad de uso debe ser el apartaod mas rapido de acceder
+                en esta tabs quiero poder aregar nuevos trabajos aunque deberia ser la primera pagina que por facilidad
+                de uso debe ser el apartaod mas rapido de acceder
             </div>
         </div>
-        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0"> aqui se revisan las ot realizadas y el avance
+        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+            aqui se revisan las ot realizadas y el avance
         </div>
     </div>
 </div>
-
+<script>
+    jQuery(document).ready(function() {
+        
+        jQuery('#buscarPatente').keyup(function() {
+            $(this).val($(this).val().toUpperCase());
+        });
+    });
+</script>
 
 {% endblock content %}

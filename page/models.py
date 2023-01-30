@@ -2,6 +2,12 @@ from django.db import models
 from django.core.validators import MaxLengthValidator
 from django.contrib.auth.models import User
 
+
+unidad_medida = [
+    ('km', 'Kilometros'),
+    ('mill', 'Millas'),
+]
+
 class HoraHombre(models.Model):
     nombre_hh = models.CharField(max_length=50)
     descripcion_hh= models.CharField(max_length=250, verbose_name="Descripción")
@@ -22,11 +28,13 @@ class Cliente(models.Model):
         return self.rut_cli
     
 class Vehiculo(models.Model):
+    rut_cli = models.ForeignKey(Cliente, on_delete=models.CASCADE, verbose_name="Rut Cliente")
     patente_vh= models.CharField(primary_key=True, max_length=7, verbose_name="Patente")
     marca_vh = models.CharField(max_length=50, verbose_name="Marca")
+    modelo_vh = models.CharField(max_length=50, verbose_name="Modelo")
     cilindrada_vh = models.PositiveIntegerField( verbose_name="Cilindrada")
     kilometraje_vh = models.PositiveIntegerField( verbose_name="Kilometraje")
-    rut_cli = models.ForeignKey(Cliente, on_delete=models.CASCADE, verbose_name="Rut Cliente")
+    mill_km_vh = models.CharField(max_length=50, verbose_name="Unidad de Medida", choices=unidad_medida, default='Kilometros')
     
     def __str__(self):
         return self.patente_vh
@@ -38,7 +46,9 @@ class Servicio(models.Model):
     hrs_500 = models.PositiveIntegerField( verbose_name="Valor < 500 cc")
     hrs_800 = models.PositiveIntegerField( verbose_name="Valor < 800 cc")
     hrs_810 = models.PositiveIntegerField( verbose_name="Valor > 810 cc")
+    tipo_sv = models.CharField(max_length=250, verbose_name= "Tipo Servicio", null=True)
     id_hh = models.ForeignKey(HoraHombre, verbose_name= "ID Hora Hombre", on_delete=models.CASCADE)
+    
     
     def __str__(self):
         return self.nombre_sv
@@ -56,7 +66,7 @@ class Ficha_ingreso(models.Model):
     
 class Detalle(models.Model):
     precio_servicio = models.PositiveIntegerField( verbose_name="Precio servicio")
-    id_fi = models.ForeignKey(Ficha_ingreso, on_delete=models.CASCADE, verbose_name="Número de Ficha")
+    id_fi = models.ForeignKey(Ficha_ingreso, on_delete=models.CASCADE, verbose_name="Número de Ficha", null=True, blank=True)
     id_sv = models.ForeignKey(Servicio, on_delete=models.CASCADE, verbose_name="Número de servicio")
     
     def __str__(self):

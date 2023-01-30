@@ -32,6 +32,7 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = '__all__'
+        exclude = ('usuario_cli',)
         
 class FallaForm(forms.ModelForm):
     
@@ -51,11 +52,24 @@ class OTForm(forms.ModelForm):
         model = Orden_trabajo
         fields = '__all__'
 
-class vehiculoForm(forms.ModelForm):
+class VehiculoForm(forms.ModelForm):
     
     class Meta:
         model = Vehiculo
         fields = '__all__'
+        
+    def clean_patente_vh(self):
+        data = self.cleaned_data['patente_vh']
+        return data.upper()
+    
+    def clean_marca_vh(self):
+        data = self.cleaned_data['marca_vh']
+        return data.upper()
+    
+    def clean_modelo_vh(self):
+        data = self.cleaned_data['modelo_vh']
+        return data.upper()
+    
 
 class TrabajadorForm(forms.ModelForm):
     
