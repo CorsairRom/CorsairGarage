@@ -10,11 +10,11 @@
                 <div class="container">   
                     <div class="row">  
                         <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-4">
-                            <h3 class="display-6 text-center">Registro de Motocicleta</h3>
-                            <form action="" method="post">
+                            <h3 class="display-6 text-center">Ingreso de cliente</h3>
+                            <form action="" method="POST">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}     
-                                <button type="submit" class="button btn btn-success">Registrar</button>
+                                <button type="submit" class="btn btn-success">Registrar</button>
                             </form>
                             <br>
                         </div>
@@ -24,7 +24,5 @@
         </div>
     </div>
 </div>  
-<script>
-    {% comment %} $('#id_rut_cli').prop('disabled', 'disabled'); {% endcomment %}
-</script>
+
 {% endblock content %}

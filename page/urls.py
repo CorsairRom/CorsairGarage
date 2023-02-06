@@ -5,9 +5,9 @@ urlpatterns = [
     path('', index, name= "index"),
     path('perfil/', perfil, name= "perfil"),
     path('dashboard/', dashboard, name= "dashboard"),
-    path('consulta-cliente/', consulta_cliente, name= "consulta-cliente"),
-    path('get_client/', get_client, name= "get_client"),
+    path('create-cliente/', consulta_cliente, name= "create-cliente"),
+    path('get_client/<str:rut>', get_client, name= "get_client"),
     path('get_moto/<str:patente>', get_moto, name= "get_moto"),
     path('create-client/', create_client, name= "create-client"),
-    path('add-Mbike/', add_Mbike, name= "add-Mbike"),
+    path('add-Mbike/<str:rut>', add_Mbike, name= "add-Mbike"),
 ]

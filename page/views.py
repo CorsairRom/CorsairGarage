@@ -20,16 +20,36 @@ def dashboard(request):
     return render(request, "app/dashboard.html")
 
 def consulta_cliente(request):
-    
-    return render(request, "app/consulta-cliente.html")
+    form = ClienteForm (request.POST or None)
+    data = {
+        "form" : form   
+    } 
+    if request.method == "POST":
+        form2 = ClienteForm(data = request.POST)
+        if form2.is_valid():
+            form2.save(commit=False)
+            datos = form2.cleaned_data
+            client = Cliente()
+            client.rut_cli = datos.get("rut_cli")
+            client.nombre_cli = datos.get("nombre_cli")
+            client.apellido_cli = datos.get("apellido_cli")
+            client.direccion_clie = datos.get("direccion_clie")
+            client.celular_cli = datos.get("celular_cli")
+            client.save()
+            return redirect('add-Mbike', datos.get("rut_cli"))
+            
+    else:
+        form = ClienteForm()
+    return render(request, "app/create-cliente.html", data)
 
 def perfil(request):
     
     
     return render(request, "page/perfil.html")
 
-def get_client(_request):
-    client = list(Cliente.objects.values())
+def get_client(_request, rut):
+    # client = list(Cliente.objects.values())
+    client = list(Cliente.objects.filter(rut_cli=rut).values())
     if (len(client)>0):
         data = {'message': "success", 'cliente': client}
     else:
@@ -52,7 +72,7 @@ def create_client(request):
         "form" : form
     }
     if request.method == "POST":
-        form2 = ClienteForm(data = request.POST)
+        form2 = ClienteForm(request.POST)
         if form2.is_valid():
             form2.save()
             datos = form2.cleaned_data
@@ -67,8 +87,8 @@ def create_client(request):
             return render(request, "page/create-client.html", {"form": form2})   
     return render(request, "app/create-client.html", data)
 
-def add_Mbike(request):
-    form = VehiculoForm(request.POST or None)
+def add_Mbike(request, rut):
+    form = VehiculoForm(request.POST or None, initial={'rut_cli': rut})
     data = {
         "form" : form
     }
@@ -85,7 +105,7 @@ def add_Mbike(request):
             Mbike.kilometraje_vh = datos.get("kilometraje_vh")
             Mbike.rut_cli = datos.get("rut_cli")
             Mbike.save()
-            return redirect(index)
+            return redirect(dashboard)
         else:
             data["form"] = form2
     return render(request, "app/add-Mbike.html", data)

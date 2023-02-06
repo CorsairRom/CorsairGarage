@@ -89,7 +89,7 @@
                             <input type="text" class="form-control border" id="buscarCliente" placeholder=" ">
                             <label for="buscarCliente">Rut Cliente</label>
                             <button class="btn btn-outline-light mt-2" type="submit"
-                                name="btnConsultaCliente">Consultar</button>
+                                name="btnConsultaCliente" id="ConsultarCli" onclick="captureInputrut(event)">Consultar</button>
                         </div>
                     </div>
                     <div class="col-md-5 shadow rounded-4 l-bg-gray-dark">
@@ -98,48 +98,63 @@
                         <div class="form-floating mb-3 text-center text-dark">
                             <input type="text" class="form-control" id="buscarPatente" placeholder=" ">
                             <label for="buscarPatente">Patente Vehículo</label>
-                            <button class="btn btn-outline-dark text-light mt-2" type="submit" name="btnConsultaCliente"
+                            <button class="btn btn-outline-dark text-light mt-2" type="submit" name="btnConsultaPatente"
                                 id="btnConsultarPatente">Consultar</button>
                         </div>
 
                     </div>
                 </div>
-                <div class="row mt-4"> <!-- reapar margen-->
+                <div class="row mt-4"> <!-- reparar margen-->
                     <div class="col-12 shadow rounded-4">
-                    <h4 class="text-center mt-2">Motocicletas en el taller</h4>
-                    <table class="table table-hover ">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <h4 class="text-center mt-2">Ordenes de Trabajo Activas</h4>
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Patente</th>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Celular</th>
+                                    <th scope="col">Fecha de ingreso</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalQuery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-info">
+            <div class="modal-content text-center" role="document">
+                <div class="modal-header d-flex justify-content-center">
+                    <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Alerta</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="textQuery">
+                    {% comment %} puedo agregar un icono {% endcomment %}
+                    <h5 id="modalText"></h5>
+                </div>
+                <div class="modal-footer" id="footerModal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                    <button type="button" class="btn btn-dark"><a href="{% url 'create-cliente' %}">Registrar</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
 </div>
+
+
 {% endblock content %}

@@ -1,5 +1,3 @@
-
-
 const loadMbikes = async (patente) => {
     console.log(patente);
     try {
@@ -43,7 +41,7 @@ const firstLoad = async (patente) => {
 };
 
 // window.addEventListener('load', async () => {
-//     const patente = 'EH-311'
+//     const patente = '18202300-0'
 //     await firstLoad(patente);
 // });
 

@@ -14,7 +14,8 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
-    <script src="{% static 'js/consulta.js'%}"></script>
+    {% comment %} <script src="{% static 'js/consulta.js'%}"></script> {% endcomment %}
+    
     <script src="https://kit.fontawesome.com/3dfcf40508.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
     <link rel="stylesheet" href="{% static 'css/dasboardcard.css'%}">
@@ -55,4 +56,5 @@
 
 
     {% endblock content %}
+    <script src="{% static 'js/app/consulta-cliente.js'%}"></script>
 </body>
