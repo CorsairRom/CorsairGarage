@@ -14,6 +14,7 @@ class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = '__all__'
+        exclude = ('id',)
         
 class DetalleForm(forms.ModelForm):
     

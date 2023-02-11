@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Cliente, Vehiculo, Servicio
+from .models import Cliente, HoraHombre, Vehiculo, Servicio
 from .forms import ClienteForm, ServicioForm, VehiculoForm, buscarRut
 
 
@@ -114,6 +114,7 @@ def add_Mbike(request, rut):
     data = {
         "form" : form
     }
+        
     if request.method == "POST":
         form2 = VehiculoForm(data = request.POST)
         if form.is_valid():
@@ -144,20 +145,25 @@ def add_service(request):
     data = {
         "form": form,
     }
+    hh = HoraHombre.objects.all()
+    # for h in hh:
+    #     print(h.nombre_hh)
     if request.method == "POST":
         form2 = ServicioForm(data= request.POST)
         if form2.is_valid():
             form2.save(commit=False)
             datos = form2.cleaned_data
-            service = Servicio()
-            service.nombre_sv = datos.get("nombre_sv")
-            service.desc_sv = datos.get("desc_sv")
-            service.hrs_240 = datos.get("hrs_240")
-            service.hrs_500 = datos.get("hrs_500")
-            service.hrs_800 = datos.get("hrs_800")
-            service.hrs_810 = datos.get("hrs_810")
-            service.save()
-            return redirect(list_services)
+            key = str(datos.get("id_hh")).split(" ")[0]
+            print(key)
+            # service = Servicio()
+            # service.nombre_sv = datos.get("nombre_sv")
+            # service.desc_sv = datos.get("desc_sv")
+            # service.hrs_240 = datos.get("hrs_240")
+            # service.hrs_500 = datos.get("hrs_500")
+            # service.hrs_800 = datos.get("hrs_800")
+            # service.hrs_810 = datos.get("hrs_810")
+            # service.save()
+            # return redirect(list_services)
         else:
             data["form"] = form2
     

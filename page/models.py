@@ -8,6 +8,15 @@ unidad_medida = [
     ('mill', 'Millas'),
 ]
 
+opcion_tipo_sv = [
+    ('Mantencion', 'Mantención'),
+    ('Ajuste', 'Ajuste'),
+    ('Reemplazo', 'Reemplazo'),
+    ('Reparacion', 'Reparación'), 
+    ('Modificacion', 'Modificación'), 
+    ('Revision', 'Revisión'), 
+]
+
 class HoraHombre(models.Model):
     nombre_hh = models.CharField(max_length=50)
     descripcion_hh= models.CharField(max_length=250, verbose_name="Descripción")
@@ -40,13 +49,14 @@ class Vehiculo(models.Model):
         return self.patente_vh
     
 class Servicio(models.Model):
+    id = models.CharField(primary_key=True, max_length=20)
     nombre_sv = models.CharField(max_length=50, verbose_name= "Nombre Servicio")
     desc_sv = models.TextField(verbose_name= "Descripción Servicio")
     hrs_240 = models.PositiveIntegerField( verbose_name="Horas hasta 240 cc")
     hrs_500 = models.PositiveIntegerField( verbose_name="Horas hasta 500 cc")
     hrs_800 = models.PositiveIntegerField( verbose_name="Horas hasta 800 cc")
     hrs_810 = models.PositiveIntegerField( verbose_name="Horas desde 810 cc")
-    tipo_sv = models.CharField(max_length=250 ,verbose_name= "Tipo Servicio", null=True)
+    tipo_sv = models.CharField(max_length=250 ,verbose_name= "Tipo Servicio", choices=opcion_tipo_sv, default='Mantención')
     id_hh = models.ForeignKey(HoraHombre, verbose_name= "ID Hora Hombre", on_delete=models.CASCADE)
     
     def __str__(self):
