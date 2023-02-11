@@ -1,0 +1,44 @@
+{% extends 'layouts/base-dashboard.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "includes/sidebar.html" %}
+        <div class="col mt-2">
+            <div class="row d-flex justify-content-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded-5 shadow p-3 mb-4">
+                            <div class="text-center">
+                                <h4>Lista de servicios</h4>
+                            </div>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for service in services %}
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

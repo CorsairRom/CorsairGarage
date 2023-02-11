@@ -14,7 +14,7 @@ class HoraHombre(models.Model):
     precio_hh= models.PositiveIntegerField(verbose_name="Precio")
     
     def __str__(self):
-        return self.nombre_hh
+        return self.nombre_hh + ' $' + str(self.precio_hh)
     
 class Cliente(models.Model):
     usuario_cli = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario", null=True)
@@ -41,14 +41,13 @@ class Vehiculo(models.Model):
     
 class Servicio(models.Model):
     nombre_sv = models.CharField(max_length=50, verbose_name= "Nombre Servicio")
-    desc_sv = models.CharField(max_length=250, verbose_name= "Descripción Servicio")
-    hrs_240 = models.PositiveIntegerField( verbose_name="Valor < 240 cc")
-    hrs_500 = models.PositiveIntegerField( verbose_name="Valor < 500 cc")
-    hrs_800 = models.PositiveIntegerField( verbose_name="Valor < 800 cc")
-    hrs_810 = models.PositiveIntegerField( verbose_name="Valor > 810 cc")
-    tipo_sv = models.CharField(max_length=250, verbose_name= "Tipo Servicio", null=True)
+    desc_sv = models.TextField(verbose_name= "Descripción Servicio")
+    hrs_240 = models.PositiveIntegerField( verbose_name="Horas hasta 240 cc")
+    hrs_500 = models.PositiveIntegerField( verbose_name="Horas hasta 500 cc")
+    hrs_800 = models.PositiveIntegerField( verbose_name="Horas hasta 800 cc")
+    hrs_810 = models.PositiveIntegerField( verbose_name="Horas desde 810 cc")
+    tipo_sv = models.CharField(max_length=250 ,verbose_name= "Tipo Servicio", null=True)
     id_hh = models.ForeignKey(HoraHombre, verbose_name= "ID Hora Hombre", on_delete=models.CASCADE)
-    
     
     def __str__(self):
         return self.nombre_sv
@@ -86,11 +85,11 @@ class Trabajador(models.Model):
     nombre_trab = models.CharField(max_length=50, verbose_name="Nombre")
     apellido_trab_pa = models.CharField(max_length= 100, verbose_name="Apellido Paterno")
     apellido_trab_ma = models.CharField(max_length= 100, verbose_name="Apellido Materno")
-    celular_trab = models.IntegerField(verbose_name="Número Contacto", validators=[MaxLengthValidator(999999999)])
-    tipo_trab = models.CharField(max_length=20, verbose_name="Clasificación")
+    celular_trab = models.IntegerField(verbose_name="Número Contacto")
+    tipo_trab = models.CharField(max_length=250, verbose_name="Clasificación")
     
     def __str__(self):
-        return self.rut_trab
+        return  self.nombre_trab + ' ' + self.apellido_trab_pa + ' ' +self.rut_trab
     
 class Orden_trabajo(models.Model):
     fecha_ing_ot = models.DateField(auto_now_add=True, verbose_name="Fecha Ingreso")

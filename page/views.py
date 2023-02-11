@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Cliente, Vehiculo
-from .forms import ClienteForm, VehiculoForm
+from .models import Cliente, Vehiculo, Servicio
+from .forms import ClienteForm, ServicioForm, VehiculoForm, buscarRut
 
 
 # ----------------PAGE SECTION!--------------------------------
@@ -66,6 +66,15 @@ def get_moto(request, patente):
         # return redirect( to = "create_client" )
     return JsonResponse(data)
 
+def get_moto_rut(request, rut):
+    moto = list(Vehiculo.objects.filter(rut_cli = rut).values())
+    if (len(moto)>0):
+        data = {'message': "success", 'moto': moto}
+    else:
+        data = {'message': "error"}
+    
+    return JsonResponse(data)
+
 def create_client(request):
     form = ClienteForm (request.POST or None)
     data = {
@@ -86,6 +95,19 @@ def create_client(request):
         else:
             return render(request, "page/create-client.html", {"form": form2})   
     return render(request, "app/create-client.html", data)
+
+def view_bikes_client(request, rut):
+    Mbikes = Vehiculo.objects.filter(rut_cli = rut)
+    client = Cliente.objects.get(rut_cli = rut)
+    
+    print(Mbikes.count())
+    print(client)
+    data = {
+        "Mbikes" : Mbikes,
+        "client" : client, 
+    }
+    return render(request, "app/view-bikes-client.html", data)
+
 
 def add_Mbike(request, rut):
     form = VehiculoForm(request.POST or None, initial={'rut_cli': rut})
@@ -109,3 +131,34 @@ def add_Mbike(request, rut):
         else:
             data["form"] = form2
     return render(request, "app/add-Mbike.html", data)
+
+def list_services(request):
+    services = Servicio.objects.all()
+    data = {
+        "services": services
+    }
+    return render(request, "app/list-services.html", data)
+
+def add_service(request):
+    form = ServicioForm(request.POST or None)
+    data = {
+        "form": form,
+    }
+    if request.method == "POST":
+        form2 = ServicioForm(data= request.POST)
+        if form2.is_valid():
+            form2.save(commit=False)
+            datos = form2.cleaned_data
+            service = Servicio()
+            service.nombre_sv = datos.get("nombre_sv")
+            service.desc_sv = datos.get("desc_sv")
+            service.hrs_240 = datos.get("hrs_240")
+            service.hrs_500 = datos.get("hrs_500")
+            service.hrs_800 = datos.get("hrs_800")
+            service.hrs_810 = datos.get("hrs_810")
+            service.save()
+            return redirect(list_services)
+        else:
+            data["form"] = form2
+    
+    return render(request, "app/add-service.html", data)

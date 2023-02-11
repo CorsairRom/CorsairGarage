@@ -77,3 +77,7 @@ class TrabajadorForm(forms.ModelForm):
         model = Trabajador
         fields = '__all__'
         
+class buscarRut(forms.ModelForm):
+    
+    rut = forms.CharField(max_length=10)
+        
