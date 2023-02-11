@@ -6,10 +6,10 @@
     <div class="row">
         {% include "includes/sidebar.html" %}
         <div class="col mt-2">
-            <div class="row d-flex justify-content-center">
+            <div class="row">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded-5 shadow p-3 mb-4">
+                    
+                        <div class="col-12 col-md-12  mt-3 border rounded-5 shadow p-3 mb-4">
                             <div class="text-center">
                                 <h4>Lista de servicios</h4>
                             </div>
@@ -25,16 +25,16 @@
                                 <tbody>
                                     {% for service in services %}
                                     <tr>
-                                        <td scope="row">1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td scope="row">{{service.id}}</td>
+                                        <td>{{service.nombre_sv}}</td>
+                                        <td>{{service.desc_sv}}</td>
+                                        <td>{{service.tipo_sv}}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

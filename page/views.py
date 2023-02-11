@@ -146,24 +146,35 @@ def add_service(request):
         "form": form,
     }
     hh = HoraHombre.objects.all()
-    # for h in hh:
-    #     print(h.nombre_hh)
+    service_data = Servicio.objects.latest('id')
+    last_id = str(service_data.id).split("-")[1]
+    new_id = int(last_id)+1
+    print(new_id)
     if request.method == "POST":
         form2 = ServicioForm(data= request.POST)
         if form2.is_valid():
             form2.save(commit=False)
             datos = form2.cleaned_data
             key = str(datos.get("id_hh")).split(" ")[0]
-            print(key)
-            # service = Servicio()
-            # service.nombre_sv = datos.get("nombre_sv")
-            # service.desc_sv = datos.get("desc_sv")
-            # service.hrs_240 = datos.get("hrs_240")
-            # service.hrs_500 = datos.get("hrs_500")
-            # service.hrs_800 = datos.get("hrs_800")
-            # service.hrs_810 = datos.get("hrs_810")
-            # service.save()
-            # return redirect(list_services)
+            if key == "Básico":
+                code = "CXB-"+str(new_id) 
+            elif key == "Eléctrico":
+                code = "CXE-"+str(new_id)
+            else:
+                code = "CXT-"+str(new_id)
+            print(code)
+            service = Servicio()
+            service.nombre_sv = datos.get("nombre_sv")
+            service.desc_sv = datos.get("desc_sv")
+            service.hrs_240 = datos.get("hrs_240")
+            service.hrs_500 = datos.get("hrs_500")
+            service.hrs_800 = datos.get("hrs_800")
+            service.hrs_810 = datos.get("hrs_810")
+            service.tipo_sv = datos.get("tipo_sv")
+            service.id_hh = datos.get("id_hh")
+            service.id = str(code)
+            service.save()
+            return redirect(list_services)
         else:
             data["form"] = form2
     
