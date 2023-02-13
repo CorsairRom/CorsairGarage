@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Cliente, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
+from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
 from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut
 
 
@@ -127,13 +127,55 @@ def view_bikes_client(request, rut):
 
 def detail_service(request, rut, patente, ficha):
     form = DetalleForm(request.POST or None, initial={'id_fi': ficha})
+    ficha_id = Ficha_ingreso.objects.get(id=ficha)
+    detalles = Detalle.objects.filter(id_fi = ficha)
     Mbikes = Vehiculo.objects.get(patente_vh = patente)
     client = Cliente.objects.get(rut_cli = rut)
+    
+    
     data = {
         "form": form,
+        "client": client,
+        "Mbikes": Mbikes,
+        "detalles": detalles
     }
-    
-    
+    cc = Mbikes.cilindrada_vh
+    def calculo(cc, sv):
+        
+        if cc < 240:
+            horas = sv.hrs_240
+            precio = cc*horas
+            return round(int(precio))
+        elif 241<cc<500:
+            horas = sv.hrs_500
+            precio = cc*horas
+            return round(int(precio))
+        elif 501 <cc< 810:
+            horas = sv.hrs_800
+            precio = cc*horas
+            return round(int(precio))
+        elif cc > 810:
+            horas = sv.hrs_810
+            precio = cc*horas
+            return round(int(precio))
+        precio = 10000
+        return precio
+    if request.method == "POST":
+        form2 = DetalleForm(request.POST)
+        
+        if form2.is_valid():
+            form2.save(commit=False)
+            datos = form2.cleaned_data
+            detail = Detalle()
+            detail.id_fi = ficha_id
+            detail.id_sv = datos.get("id_sv")
+            id_seleccionado = datos.get("id_sv")
+            servicio_seleccionado = Servicio.objects.get(id = id_seleccionado.id)
+            detail.precio_servicio = calculo(cc, servicio_seleccionado)
+            detail.save()
+            return redirect(detail_service, rut, patente, ficha)
+        else:
+            data["form"] = form2
     return render(request, "app/detail-service.html", data)
 
 def add_Mbike(request, rut):

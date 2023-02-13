@@ -60,7 +60,7 @@ class Servicio(models.Model):
     id_hh = models.ForeignKey(HoraHombre, verbose_name= "ID Hora Hombre", on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.nombre_sv
+        return self.id +' - '+ self.nombre_sv
     
 class Ficha_ingreso(models.Model):
     patente_vh = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, verbose_name="Patente")
@@ -72,7 +72,7 @@ class Ficha_ingreso(models.Model):
         return str(self.id) #type: ignore
     
 class Detalle(models.Model):
-    precio_servicio = models.PositiveIntegerField( verbose_name="Precio servicio")
+    precio_servicio = models.IntegerField( verbose_name="Precio servicio")
     id_fi = models.ForeignKey(Ficha_ingreso, on_delete=models.CASCADE, verbose_name="Número de Ficha", null=True, blank=True)
     id_sv = models.ForeignKey(Servicio, on_delete=models.CASCADE, verbose_name="Número de servicio")
     
