@@ -2,43 +2,48 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% block content %}
+
 <div class="container-fluid">
     <div class="row">
         {% include "includes/sidebar.html" %}
         <div class="col mt-2">
             <div class="row">
                 <div class="container">
-                    
-                        <div class="col-12 col-md-12  mt-3 border rounded-5 shadow p-3 mb-4">
-                            <div class="text-center">
-                                <h4>Lista de servicios</h4>
-                            </div>
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Descripción</th>
-                                        <th scope="col">Tipo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for service in services %}
-                                    <tr>
-                                        <td scope="row">{{service.id}}</td>
-                                        <td>{{service.nombre_sv}}</td>
-                                        <td>{{service.desc_sv}}</td>
-                                        <td>{{service.tipo_sv}}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                    <div class="col-12 col-md-12  mt-3 border rounded-5 shadow p-3 mb-4">
+                        <div class="text-center">
+                            <h4>Lista de servicios</h4>
                         </div>
-                    
+                        <table class="table table-hover table-fluid" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="min-width: 72px;">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for service in services %}
+                                <tr>
+                                    <td scope="row">{{service.id}}</td>
+                                    <td>{{service.nombre_sv}}</td>
+                                    <td>{{service.desc_sv}}</td>
+                                    <td>{{service.tipo_sv}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-info"><a href="{% url 'add-service' %}">Nuevo Servicio</a></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready( function () {
+        $('#tabl').DataTable();
+    } );
+</script>
 {% endblock content %}

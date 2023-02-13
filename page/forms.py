@@ -21,12 +21,14 @@ class DetalleForm(forms.ModelForm):
     class Meta:
         model = Detalle
         fields = '__all__'
+        exclude = ('precio_servicio',)
         
 class Ficha_ingresoForm(forms.ModelForm):
     
     class Meta:
         model = Ficha_ingreso
         fields = '__all__'
+        exclude = ('rut_cli',)
         
 class ClienteForm(forms.ModelForm):
     

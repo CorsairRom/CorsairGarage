@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Cliente, HoraHombre, Vehiculo, Servicio
-from .forms import ClienteForm, ServicioForm, VehiculoForm, buscarRut
+from .models import Cliente, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
+from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut
 
 
 # ----------------PAGE SECTION!--------------------------------
@@ -92,6 +92,7 @@ def create_client(request):
             client.direccion_clie = datos.get("direccion_clie")
             client.celular_cli = datos.get("celular_cli")
             client.save()
+            #aqui falta el return render para que no se duplique
         else:
             return render(request, "page/create-client.html", {"form": form2})   
     return render(request, "app/create-client.html", data)
@@ -99,15 +100,41 @@ def create_client(request):
 def view_bikes_client(request, rut):
     Mbikes = Vehiculo.objects.filter(rut_cli = rut)
     client = Cliente.objects.get(rut_cli = rut)
-    
-    print(Mbikes.count())
-    print(client)
+    form = Ficha_ingresoForm(request.POST or None)
     data = {
         "Mbikes" : Mbikes,
         "client" : client, 
+        "form" : form
     }
+    
+    if request.method == "POST":
+        form2 = Ficha_ingresoForm(request.POST)
+        if form2.is_valid():
+            form2.save(commit=False)
+            datos = form2.cleaned_data
+            fi = Ficha_ingreso()
+            fi.patente_vh = datos.get("patente_vh")
+            patente = fi.patente_vh
+            fi.rut_cli = client
+            fi.observaciones_fi = datos.get("observaciones_fi")
+            fi.save()
+            ficha = fi.id #type: ignore
+            print(ficha)
+            return redirect(detail_service, rut, patente, ficha)
+        else:
+            data["form"] = form2 
     return render(request, "app/view-bikes-client.html", data)
 
+def detail_service(request, rut, patente, ficha):
+    form = DetalleForm(request.POST or None, initial={'id_fi': ficha})
+    Mbikes = Vehiculo.objects.get(patente_vh = patente)
+    client = Cliente.objects.get(rut_cli = rut)
+    data = {
+        "form": form,
+    }
+    
+    
+    return render(request, "app/detail-service.html", data)
 
 def add_Mbike(request, rut):
     form = VehiculoForm(request.POST or None, initial={'rut_cli': rut})
@@ -146,10 +173,14 @@ def add_service(request):
         "form": form,
     }
     hh = HoraHombre.objects.all()
-    service_data = Servicio.objects.latest('id')
-    last_id = str(service_data.id).split("-")[1]
-    new_id = int(last_id)+1
-    print(new_id)
+    data_sv = Servicio.objects.all()
+    list_id = []
+    for data_id in data_sv:
+        idsv = int(str(data_id.id).split("-")[1])
+        list_id.append(idsv)
+    max_id = max(list_id)
+    new_id = max_id + 1
+    print(new_id)   
     if request.method == "POST":
         form2 = ServicioForm(data= request.POST)
         if form2.is_valid():
@@ -173,9 +204,31 @@ def add_service(request):
             service.tipo_sv = datos.get("tipo_sv")
             service.id_hh = datos.get("id_hh")
             service.id = str(code)
-            service.save()
-            return redirect(list_services)
+            if 'continue' in request.POST:
+                service.save()
+                return redirect(add_service)
+            else:
+                service.save()
+                return redirect(list_services)
         else:
             data["form"] = form2
     
     return render(request, "app/add-service.html", data)
+
+def generate_repair_order(request, rut, patente):
+    form1 = OTForm(request.POST or None)
+    form2 = Ficha_ingresoForm(request.POST or None)
+    form3 = DetalleForm(request.POST or None)
+    data = {
+        "form1" : form1,
+        "form2" : form2,
+        "form3" : form3,
+    }
+    return render(request, "app/generate-repair-order.html", data)
+# borrar
+def ficha_ingreso(request, rut, patente):
+    form = Ficha_ingresoForm(request.POST or None)
+    data = {
+        "form" : form, 
+    }
+    return render(request, "app/ficha-ingreso.html", data)

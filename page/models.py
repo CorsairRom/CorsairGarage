@@ -63,15 +63,13 @@ class Servicio(models.Model):
         return self.nombre_sv
     
 class Ficha_ingreso(models.Model):
-    fecha_ing_fi= models.DateField(auto_now_add=True, verbose_name="Fecha Ingreso")
-    total_fi= models.PositiveIntegerField(verbose_name="Total")
-    observaciones_fi= models.CharField(max_length=250, verbose_name="Observaciones")
     patente_vh = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, verbose_name="Patente")
     rut_cli = models.ForeignKey(Cliente, on_delete=models.CASCADE, verbose_name="Rut")
-    estado_fi = models.CharField(max_length=50, verbose_name="Estado")
+    fecha_ing_fi= models.DateField(auto_now_add=True, verbose_name="Fecha Ingreso")
+    observaciones_fi= models.TextField(verbose_name="Observaciones")
     
     def __str__(self):
-        return str(self.patente_vh)
+        return str(self.id) #type: ignore
     
 class Detalle(models.Model):
     precio_servicio = models.PositiveIntegerField( verbose_name="Precio servicio")
@@ -106,7 +104,7 @@ class Orden_trabajo(models.Model):
     fecha_fin_ot = models.DateField(auto_now=False, verbose_name="Fecha Finalización", null=True, blank=True)
     id_fi = models.ForeignKey(Ficha_ingreso, on_delete=models.CASCADE, verbose_name="Ficha Ingreso" )
     rut_trab = models.ForeignKey(Trabajador, on_delete=models.CASCADE, verbose_name="Trabajador")
-    
+    total_fi= models.PositiveIntegerField(verbose_name="Total", default=0)
     def __str__(self):
         return str(self.id_fi)
     
@@ -114,7 +112,7 @@ class Orden_trabajo(models.Model):
 class Falla(models.Model):
     nombre_f = models.CharField(max_length=50, verbose_name="Nombre Falla")
     desc_f = models.CharField(max_length=250, verbose_name="Descripción Falla")
-    hora_hh_f = models.IntegerField( verbose_name="Horas Hombre", validators=[MaxLengthValidator(9999)])
+    hora_hh_f = models.IntegerField( verbose_name="Horas Hombre")
     id_ot = models.ForeignKey(Orden_trabajo, models.CASCADE, verbose_name="Orden Trabajo")
     
     def __str__(self):
