@@ -2,6 +2,9 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% block content %}
+{% load humanize %}
+{% load mathfilters %}
+
 <div class="container-fluid">
     <div class="row">
         {% include "includes/sidebar.html" %}
@@ -10,27 +13,67 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-2">
+                            <div class="text-center">
+                                <h5>Detalle de servicio</h5>
+                                <hr class="p-0 m-1">
+                                <br>
+                            </div>
+                            <div class="row">
+                                <div class="col" style="border-right: 1px solid ;">
+                                    <h6>Datos Cliente:</h6>
+                                    <p class="p-0 m-0"> <strong>Cliente:</strong> {{client.nombre_cli}}  {{client.apellido_cli}}</p>
+                                    <hr class="p-0 m-1">
+                                    <p class="p-0 m-0"> <strong>Rut:</strong> {{client.rut_cli}}</p>
+                                    <hr class="p-0 m-1">
+                                    <p class="p-0 m-0"> <strong>Contacto:</strong> {{client.celular_cli}}</p>
+                                </div> 
+                                <div class="col">
+                                    <h6>Datos Motocicleta:</h6>
+                                    <p class="p-0 m-0">Patente: {{Mbikes.patente_vh}}</p>
+                                    <hr class="p-0 m-1">
+                                    <p class="p-0 m-0">Marca: {{Mbikes.marca_vh}}</p>
+                                    <hr class="p-0 m-1">
+                                    <p class="p-0 m-0">Modelo: {{Mbikes.modelo_vh}}</p>
+                                    <hr class="p-0 m-1">
+                                    <p class="p-0 m-0">Cilindrada: {{Mbikes.cilindrada_vh}}cc.</p>
+                                </div>      
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 mt-1 border rounded shadow p-3 mb-2">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">Id</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Nombre servicio</th>
+                                        <th scope="col">Horas</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col"><i class="fa-solid fa-ellipsis-vertical mx-2"></i></th>
                                     </tr>
                                 </thead>
-                                
                                 <tbody>
                                     {% for detalle in detalles %}
                                     <tr>
-                                        <td scope="row">1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td scope="row">{{detalle.id}}</td>
+                                        <td>{{detalle.id_sv}}</td>
+                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}</td>
+                                        <td>${{detalle.precio_servicio|intcomma}}</td>
+                                        <td><a href="{% url 'delete-detail' detalle.id client.rut_cli Mbikes.patente_vh ficha %}"><i class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
+                            {% if total %}
+                            <div class="col-12 col-md-6 offset-md-3 mt-1 border rounded shadow p-3 mb-2">
+                                
+                                <div class="text-end">
+                                    <h5>Total: ${{total|intcomma}}</h5>
+                                    <hr class="p-0 m-1">
+                                </div>
+                                
+                            </div>
+                            {% endif %}
                             {% if not detalles %}
                                 <tr class="text-center">
                                     <td> <h5>Sin detalles de servicios!</h5></td>

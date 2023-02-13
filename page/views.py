@@ -131,38 +131,52 @@ def detail_service(request, rut, patente, ficha):
     detalles = Detalle.objects.filter(id_fi = ficha)
     Mbikes = Vehiculo.objects.get(patente_vh = patente)
     client = Cliente.objects.get(rut_cli = rut)
-    
-    
+    total = 0
+    for detalle in detalles:
+        total += detalle.precio_servicio
     data = {
         "form": form,
         "client": client,
         "Mbikes": Mbikes,
-        "detalles": detalles
+        "detalles": detalles,
+        "ficha": ficha,
+        "total":total
     }
     cc = Mbikes.cilindrada_vh
     def calculo(cc, sv):
-        
+        id_hh = sv.id_hh.precio_hh
         if cc < 240:
             horas = sv.hrs_240
-            precio = cc*horas
+            precio = id_hh*horas
+            print(cc)
+            print(horas)
+            print(precio)
             return round(int(precio))
         elif 241<cc<500:
             horas = sv.hrs_500
-            precio = cc*horas
+            precio = id_hh*horas
+            print(cc)
+            print(horas)
+            print(precio)
             return round(int(precio))
         elif 501 <cc< 810:
             horas = sv.hrs_800
-            precio = cc*horas
+            precio = id_hh*horas
+            print(cc)
+            print(horas)
+            print(precio)
             return round(int(precio))
         elif cc > 810:
             horas = sv.hrs_810
-            precio = cc*horas
+            precio = id_hh*horas
+            print(cc)
+            print(horas)
+            print(precio)
             return round(int(precio))
         precio = 10000
         return precio
     if request.method == "POST":
         form2 = DetalleForm(request.POST)
-        
         if form2.is_valid():
             form2.save(commit=False)
             datos = form2.cleaned_data
@@ -177,6 +191,11 @@ def detail_service(request, rut, patente, ficha):
         else:
             data["form"] = form2
     return render(request, "app/detail-service.html", data)
+
+def delete_detail(request, id, rut, patente, ficha):
+    detail = Detalle.objects.get(id=id)
+    detail.delete()
+    return redirect(detail_service, rut, patente, ficha)
 
 def add_Mbike(request, rut):
     form = VehiculoForm(request.POST or None, initial={'rut_cli': rut})
