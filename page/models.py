@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 unidad_medida = [
     ('km', 'Kilometros'),
-    ('mill', 'Millas'),
+    ('Millas', 'Millas'),
 ]
 
 opcion_tipo_sv = [
@@ -67,6 +67,8 @@ class Ficha_ingreso(models.Model):
     rut_cli = models.ForeignKey(Cliente, on_delete=models.CASCADE, verbose_name="Rut")
     fecha_ing_fi= models.DateField(auto_now_add=True, verbose_name="Fecha Ingreso")
     observaciones_fi= models.TextField(verbose_name="Observaciones")
+    km_mill_fi = models.IntegerField(verbose_name="Kilometraje", default=0)
+    mill_km_vh = models.CharField(max_length=50, verbose_name="Unidad de Medida", choices=unidad_medida, default='Kilometros')
     
     def __str__(self):
         return str(self.id) #type: ignore

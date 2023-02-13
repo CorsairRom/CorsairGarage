@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
-from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut
+from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm
 
 
 # ----------------PAGE SECTION!--------------------------------
@@ -101,10 +101,11 @@ def view_bikes_client(request, rut):
     Mbikes = Vehiculo.objects.filter(rut_cli = rut)
     client = Cliente.objects.get(rut_cli = rut)
     form = Ficha_ingresoForm(request.POST or None)
+    # form2 = Vehiculo_change_kmForm(request.POST or None)
     data = {
         "Mbikes" : Mbikes,
         "client" : client, 
-        "form" : form
+        "form" : form,
     }
     
     if request.method == "POST":
@@ -117,6 +118,8 @@ def view_bikes_client(request, rut):
             patente = fi.patente_vh
             fi.rut_cli = client
             fi.observaciones_fi = datos.get("observaciones_fi")
+            fi.km_mill_fi = datos.get("km_mill_fi")
+            fi.mill_km_vh = datos.get("mill_km_vh")
             fi.save()
             ficha = fi.id #type: ignore
             print(ficha)
@@ -140,7 +143,9 @@ def detail_service(request, rut, patente, ficha):
         "Mbikes": Mbikes,
         "detalles": detalles,
         "ficha": ficha,
-        "total":total
+        "total":total,
+        "ficha_id": ficha_id
+        
     }
     cc = Mbikes.cilindrada_vh
     def calculo(cc, sv):

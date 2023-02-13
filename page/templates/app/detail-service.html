@@ -21,12 +21,13 @@
                             <div class="row">
                                 <div class="col" style="border-right: 1px solid ;">
                                     <h6>Datos Cliente:</h6>
-                                    <p class="p-0 m-0"> <strong>Cliente:</strong> {{client.nombre_cli}}  {{client.apellido_cli}}</p>
+                                    <p class="p-0 m-0"> <strong>Cliente:</strong> {{client.nombre_cli}}
+                                        {{client.apellido_cli}}</p>
                                     <hr class="p-0 m-1">
                                     <p class="p-0 m-0"> <strong>Rut:</strong> {{client.rut_cli}}</p>
                                     <hr class="p-0 m-1">
                                     <p class="p-0 m-0"> <strong>Contacto:</strong> {{client.celular_cli}}</p>
-                                </div> 
+                                </div>
                                 <div class="col">
                                     <h6>Datos Motocicleta:</h6>
                                     <p class="p-0 m-0">Patente: {{Mbikes.patente_vh}}</p>
@@ -36,7 +37,22 @@
                                     <p class="p-0 m-0">Modelo: {{Mbikes.modelo_vh}}</p>
                                     <hr class="p-0 m-1">
                                     <p class="p-0 m-0">Cilindrada: {{Mbikes.cilindrada_vh}}cc.</p>
-                                </div>      
+
+                                </div>
+                                <div class="row text-center">
+                                    <hr class="p-0 m-1">
+                                    <h5 class="p-0 m-0">{{ficha_id.mill_km_vh}}: {{ficha_id.km_mill_fi|intcomma}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-2">
+                            <div class="text-center">
+                                <h5>Observaciones de ingreso:</h5>
+
+                                <textarea name="" id="" cols="20" rows="3" class="form-control"
+                                    disabled>{{ficha_id.observaciones_fi}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -57,37 +73,47 @@
                                     <tr>
                                         <td scope="row">{{detalle.id}}</td>
                                         <td>{{detalle.id_sv}}</td>
-                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}</td>
+                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}
+                                        </td>
                                         <td>${{detalle.precio_servicio|intcomma}}</td>
-                                        <td><a href="{% url 'delete-detail' detalle.id client.rut_cli Mbikes.patente_vh ficha %}"><i class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
+                                        <td><a
+                                                href="{% url 'delete-detail' detalle.id client.rut_cli Mbikes.patente_vh ficha %}"><i
+                                                    class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                             {% if total %}
                             <div class="col-12 col-md-6 offset-md-3 mt-1 border rounded shadow p-3 mb-2">
-                                
+
                                 <div class="text-end">
                                     <h5>Total: ${{total|intcomma}}</h5>
                                     <hr class="p-0 m-1">
                                 </div>
-                                
+
                             </div>
                             {% endif %}
                             {% if not detalles %}
-                                <tr class="text-center">
-                                    <td> <h5>Sin detalles de servicios!</h5></td>
-                                </tr>
+                            <tr class="text-center">
+                                <td>
+                                    <h5>Sin detalles de servicios!</h5>
+                                </td>
+                            </tr>
                             {% endif %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow  mb-4">
-                            
+
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
-                                <button type="submit" class="btn btn-dark">Agregar</button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-dark">Agregar</button>
+                                    {% if detalles %}
+                                    <button type="button" class="btn btn-danger" name="continue">Generar OT</button>
+                                    {% endif %}
+                                </div>
                             </form>
                             <br>
                         </div>

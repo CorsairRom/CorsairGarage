@@ -72,6 +72,11 @@ class VehiculoForm(forms.ModelForm):
     def clean_modelo_vh(self):
         data = self.cleaned_data['modelo_vh']
         return data.upper()
+class Vehiculo_change_kmForm(forms.ModelForm):
+    
+    class Meta:
+        model = Vehiculo
+        fields = ['kilometraje_vh',]
     
 
 class TrabajadorForm(forms.ModelForm):
