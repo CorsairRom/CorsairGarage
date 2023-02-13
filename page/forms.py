@@ -21,7 +21,7 @@ class DetalleForm(forms.ModelForm):
     class Meta:
         model = Detalle
         fields = '__all__'
-        exclude = ('precio_servicio',)
+        exclude = ('precio_servicio', 'id_fi')
         
 class Ficha_ingresoForm(forms.ModelForm):
     

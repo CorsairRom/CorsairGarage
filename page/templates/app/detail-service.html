@@ -7,25 +7,52 @@
         {% include "includes/sidebar.html" %}
         <div class="col mt-2">
             <div class="row d-flex justify-content-center">
-                <div class="container">  
+                <div class="container">
                     <div class="row">
-                        
-                    </div> 
-                    <div class="row">  
-                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-4">
-                            <h3 class="display-6 text-center">Servicio</h3>
+                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-2">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    {% for detalle in detalles %}
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if not detalles %}
+                                <tr class="text-center">
+                                    <td> <h5>Sin detalles de servicios!</h5></td>
+                                </tr>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow  mb-4">
+                            
                             <form action="" method="POST">
                                 {% csrf_token %}
-                                {% bootstrap_form form %}     
+                                {% bootstrap_form form %}
                                 <button type="submit" class="btn btn-dark">Agregar</button>
                             </form>
                             <br>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
-</div>  
+</div>
 
 {% endblock content %}
