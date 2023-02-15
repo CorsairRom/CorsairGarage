@@ -82,8 +82,11 @@ class Detalle(models.Model):
         return str(self.id_fi)
 
 class Insumos(models.Model):
+    codigo_is_externo = models.CharField(max_length=150, verbose_name="Código externo", default="CXI-111111")
     nombre_is = models.CharField(max_length=50, verbose_name="Nombre Insumo")
     cantidad_is = models.PositiveIntegerField( verbose_name="Cantidad")
+    precio_is_unitario = models.IntegerField( verbose_name="Precio unitario", default=1)
+    precio_total = models.IntegerField(verbose_name="Precio", default=1)
     id_fi = models.ForeignKey(Ficha_ingreso, on_delete=models.CASCADE, verbose_name="Id Ficha")
     
     def __str__(self):

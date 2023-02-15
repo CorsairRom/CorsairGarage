@@ -1,8 +1,12 @@
-from django.http import JsonResponse
+import os
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
 from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm
-
+from django.conf import settings
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
 
 # ----------------PAGE SECTION!--------------------------------
 
@@ -101,11 +105,13 @@ def view_bikes_client(request, rut):
     Mbikes = Vehiculo.objects.filter(rut_cli = rut)
     client = Cliente.objects.get(rut_cli = rut)
     form = Ficha_ingresoForm(request.POST or None)
+    fi_client = Ficha_ingreso.objects.filter(rut_cli = rut)
     # form2 = Vehiculo_change_kmForm(request.POST or None)
     data = {
         "Mbikes" : Mbikes,
         "client" : client, 
         "form" : form,
+        "fi_client" : fi_client
     }
     
     if request.method == "POST":
@@ -135,6 +141,8 @@ def detail_service(request, rut, patente, ficha):
     Mbikes = Vehiculo.objects.get(patente_vh = patente)
     client = Cliente.objects.get(rut_cli = rut)
     total = 0
+    totalFin = 0
+    desc = 0
     for detalle in detalles:
         total += detalle.precio_servicio
     data = {
@@ -144,39 +152,40 @@ def detail_service(request, rut, patente, ficha):
         "detalles": detalles,
         "ficha": ficha,
         "total":total,
-        "ficha_id": ficha_id
-        
+        "totalFin":totalFin,
+        "ficha_id": ficha_id,
+        "desc": desc
     }
+    if totalFin ==0:
+        data["totalFin"] = total
+    if request.method == 'GET':
+        descData = request.GET.get('descuento', None)
+        if descData is not None:
+            desc= int(descData)
+            if total > 1:
+                porcentaje = total*(desc/100)
+                totalFinal = round(total-porcentaje)
+                data["desc"] = descData
+                data["totalFin"] = totalFinal
+                       
     cc = Mbikes.cilindrada_vh
     def calculo(cc, sv):
         id_hh = sv.id_hh.precio_hh
         if cc < 240:
             horas = sv.hrs_240
             precio = id_hh*horas
-            print(cc)
-            print(horas)
-            print(precio)
             return round(int(precio))
         elif 241<cc<500:
             horas = sv.hrs_500
             precio = id_hh*horas
-            print(cc)
-            print(horas)
-            print(precio)
             return round(int(precio))
         elif 501 <cc< 810:
             horas = sv.hrs_800
             precio = id_hh*horas
-            print(cc)
-            print(horas)
-            print(precio)
             return round(int(precio))
         elif cc > 810:
             horas = sv.hrs_810
             precio = id_hh*horas
-            print(cc)
-            print(horas)
-            print(precio)
             return round(int(precio))
         precio = 10000
         return precio
@@ -291,6 +300,23 @@ def generate_repair_order(request, rut, patente):
         "form3" : form3,
     }
     return render(request, "app/generate-repair-order.html", data)
+
+def render_pdf_view(request, rut, patente, ficha):
+    try:
+        template_path = 'app/basespdf/ficha-ingreso-pdf.html'
+        template = get_template(template_path)
+        context = {'myvar': 'this is your template context'}
+        html = template.render(context)
+        response = HttpResponse(content_type='application/pdf')
+        #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        pisa_status = pisa.CreatePDF(html, dest=response)
+        return response
+    except:
+        pass
+    return redirect(dashboard)
+
+
+
 # borrar
 def ficha_ingreso(request, rut, patente):
     form = Ficha_ingresoForm(request.POST or None)

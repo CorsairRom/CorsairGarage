@@ -37,7 +37,6 @@
                                     <p class="p-0 m-0">Modelo: {{Mbikes.modelo_vh}}</p>
                                     <hr class="p-0 m-1">
                                     <p class="p-0 m-0">Cilindrada: {{Mbikes.cilindrada_vh}}cc.</p>
-
                                 </div>
                                 <div class="row text-center">
                                     <hr class="p-0 m-1">
@@ -85,12 +84,24 @@
                             </table>
                             {% if total %}
                             <div class="col-12 col-md-6 offset-md-3 mt-1 border rounded shadow p-3 mb-2">
-
                                 <div class="text-end">
-                                    <h5>Total: ${{total|intcomma}}</h5>
+                                    <h6>SubTotal: ${{total|intcomma}}</h6>
+                                    <form action="" method="GET">
+                                        {% csrf_token %}
+                                        <div class="d-inline-flex">
+                                            <div class="input-group input-group-sm flex-nowrap">
+                                                <button class="btn btn-outline-secondary" type="submit"
+                                                    id="button-addon1">Descuento %</button>
+                                                <input type="number" class="form-control" placeholder="%" aria-label="%"
+                                                    aria-describedby="addon-wrapping" value="{{desc}}" name="descuento"
+                                                    style="max-width: 80px;">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <h5>Total M.O: ${{totalFin|intcomma}}</h5>
                                     <hr class="p-0 m-1">
+                                    <h5></h5>
                                 </div>
-
                             </div>
                             {% endif %}
                             {% if not detalles %}
@@ -104,7 +115,6 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow  mb-4">
-
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
@@ -112,6 +122,7 @@
                                     <button type="submit" class="btn btn-dark">Agregar</button>
                                     {% if detalles %}
                                     <button type="button" class="btn btn-danger" name="continue">Generar OT</button>
+                                    <a href="{% url 'render_pdf_view' client.rut_cli Mbikes.patente_vh ficha %}" class="btn btn-danger">Imprimir ficha</a>
                                     {% endif %}
                                 </div>
                             </form>
@@ -123,5 +134,7 @@
         </div>
     </div>
 </div>
+<script>
 
+</script>
 {% endblock content %}

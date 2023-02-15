@@ -38,14 +38,22 @@
                                             <td>{{bike.cilindrada_vh}}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-dark" data-arg1="{{bike.patente_vh}}" onclick="data(this)" id="{{bike.patente_vh}}">Nueva OT</button>
+                                                    <button type="button" class="btn btn-dark"
+                                                        data-arg1="{{bike.patente_vh}}" onclick="data(this)"
+                                                        id="{{bike.patente_vh}}">Nueva OT</button>
                                                     <button type="button"
                                                         class="btn btn-danger dropdown-toggle dropdown-toggle-split"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <span class="visually-hidden" >Toggle Dropdown</span>
+                                                        <span class="visually-hidden">Toggle Dropdown</span>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Historial</a></li>
+                                                        <li>
+                                                            <button type="button" class="dropdown-item btn btn-info"
+                                                                data-arg2="{{bike.patente_vh}}"
+                                                                onclick="viewHistory(this)">
+                                                                Historial
+                                                            </button>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                                                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                                                     </ul>
@@ -58,13 +66,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="historyView">
+                        <div class="col-12 col-md-6 offset-md-3 mt-1 border rounded-5 shadow p-3 mb-1">
+                            <h6 class="text-center">Historial</h6>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID ficha</th>
+                                        <th scope="col">Patente</th>
+                                        <th scope="col">Fecha Ingreso</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTable">
+                                    {% for fi in fi_client %}
+                                    <tr>
+                                        <th scope="row">{{fi.id}}</th>
+                                        <td>{{fi.patente_vh}}</td>
+                                        <td>{{fi.fecha_ing_fi}}</td>
+                                        <td><a href="{% url 'detail-service' client.rut_cli fi.patente_vh fi.id %}"><i
+                                                    class="fa-regular fa-eye btn btn-info"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-4">
+                        <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded-5 shadow p-3 mb-4">
                             <h3 class="display-6 text-center">Ficha Ingreso</h3>
                             <form action="" method="POST">
-                                {% csrf_token %}   
-                                {% bootstrap_form form %}     
-                                <button type="submit" class="btn btn-dark"  >Ingresar</button>
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                <button type="submit" class="btn btn-dark">Ingresar</button>
                             </form>
                             <br>
                         </div>
@@ -76,13 +110,21 @@
 
 </div>
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#id_patente_vh').attr("style", "pointer-events: none;");
-    } );
+        $('#historyView').attr('style', "display: none;");
+    });
     const data = (object) => {
         let patente = object.dataset.arg1;
         $('#id_patente_vh').val(patente).change();
-    };  
+    };
+    const viewHistory = (object) => {
+        let patente = object.dataset.arg2
+        $('#historyView').attr('style', "display: block;");
+        $('#bodyTable tr').filter(function () {
+            $(this).toggle($(this).text().toUpperCase().indexOf(patente) > -1)
+        });
+    };
 </script>
 
 {% endblock content %}
