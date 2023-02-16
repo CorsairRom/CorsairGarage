@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <style>
     .img-invoice {
-        width: 50px;
+        width: 180px;
         text-align: center;
         margin: 0 auto;
     }
@@ -34,19 +34,47 @@
     .text-center{
         text-align: center;
     }
+
+    .text-left{
+        text-align: left;
+    }
+    .pb-2{
+        padding-bottom: 20px;
+    }
+    .pb-1{
+        padding-bottom: 10px;
+    }
+    .pb-05{
+        padding-bottom: 5px;
+    }
 </style>
 <body>
-<img src="{{ icon }}" class="img-invoice">
+    <a class="img-invoice" href="https://imgur.com/aJndNwu"><img src="https://i.imgur.com/aJndNwu.png" title="source: imgur.com" /></a>
+
 <p class="head">
     Corsair Garage<br>
     Los muermos 8122, Hualpén<br>
-    +56973932259
+    +56973932259 <br>
+    <b>ID FICHA: {{ ficha.id }}</b><br>
+    <b>FECHA DE EMISIÓN: {{ ficha.fecha_ing_fi }}</b>
+</p>
+<div>
+    <p><b>CLIENTE: </b> {{ client.nombre_cli }} {{ client.apellido_cli }} <br>
+        <b>RUT:</b> {{ rut }} <br>
+        <b>CONTACTO</b> {{client.celular_cli}} <br>
+    </p>
+</div>
+                
+            
+
+<p>
+    <b>PATENTE:</b> {{ bike.patente_vh }}<br>
+    <b>MARCA:</b> {{ bike.marca_vh }}<br>
+    <b>MODELO:</b> {{ bike.modelo_vh }}<br>
+    <b>{{ficha.mill_km_vh}}:</b> {{ ficha.km_mill_fi|intcomma }}<br>
 </p>
 <p>
-    <b>FACTURA:</b> {{ ficha.id }}<br>
-    <b>FECHA DE VENTA:</b> {{ ficha.fecha_ing_fi }}<br>
-    <b>CLIENTE:</b> {{ client.nombre_cli }} {{ client.apellido_cli }}<br>
-    <b>RUT:</b> {{ rut }}<br>
+    <b>MOTIVO DE INGRESO:</b> {{ ficha.observaciones_fi}}
 </p>
 <table id="invoice">
     <thead>
@@ -85,13 +113,20 @@
 </table>
 <table style="margin-top: 250px;">
     <thead>
-    <tr>
-        <th>****Este documento es temporal y esta sujeto a cambios ****</th>
+    <tr >
+        <th class="pb-2">****Este documento es temporal y esta sujeto a cambios ****</th>
     </tr>
     <tr>
-        <th>1. Corsair Garage no ofrece garantía por repuestos alternativos, este tipo de repuestos pasa por una revisión visual y funcional antes de la instalación, pero no se asegura su duración.</th>
-        <th>2. Los repuestos son de total responsabilidad del dueño, con un plazo máximo de entrega de 3 días sin incurrir en multas, esto se obvia si se accede al servicio de compra de repuesto</th>
+        <th class="text-left pb-1">1. Corsair Garage no ofrece garantía por repuestos alternativos, este tipo de repuestos pasa por una revisión visual y funcional antes de la instalación, pero no se asegura su duración.</th>
     </tr>
+    <tr>
+        <th class="text-left pb-1">2. Los repuestos son de total responsabilidad del dueño, con un plazo máximo de entrega de 3 días sin incurrir en multas, esto se obvia si se accede al servicio de compra de repuesto</th>
+    </tr>
+    <tr>
+        <th class="text-left pb-1">3. Los vehículos deben ser retirados en un periodo de no más de 3 días luego de la finalización
+            del o los servicios completados, luego de este periodo se aplican multas de 11.000 pesos por día</th>
+    </tr>
+    
     </thead>
 </table>
 </body>

@@ -305,6 +305,7 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
     ficha = Ficha_ingreso.objects.get(id=ficha_id)
     client = Cliente.objects.get(rut_cli = rut)
     detail = Detalle.objects.filter(id_fi= ficha_id)
+    bike = Vehiculo.objects.get(patente_vh = patente)
     calc_desc = 0
     if desc > 0:
         calc_desc = round(((total*desc)/100))
@@ -321,12 +322,13 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
             'totalFinal' : totalFinal,
             'client' : client,
             'detail' : detail,
-            'valorDesc': calc_desc
+            'valorDesc': calc_desc,
+            'bike' : bike
             
         }
         html = template.render(context)
         response = HttpResponse(content_type='application/pdf')
-        #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        #response['Content-Disposition'] = f'attachment; filename="{rut}_{patente}_{ficha_id}.pdf"'
         pisa_status = pisa.CreatePDF(html, dest=response)
         return response
     except:
