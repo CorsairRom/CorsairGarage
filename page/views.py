@@ -343,7 +343,9 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
         pass
     return redirect(dashboard)
 
-
+def valve_service(request):
+    
+    return render(request,'app/valve-service.html')
 
 # borrar
 def ficha_ingreso(request, rut, patente):
