@@ -27,7 +27,7 @@ class HoraHombre(models.Model):
     
 class Cliente(models.Model):
     usuario_cli = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario", null=True)
-    rut_cli = models.CharField(primary_key=True, max_length=11, verbose_name="Rut")
+    rut_cli = models.CharField(primary_key=True, max_length=12, verbose_name="Rut")
     nombre_cli = models.CharField(max_length=50, verbose_name="Nombre")
     apellido_cli = models.CharField(max_length= 100, verbose_name="Apellido")
     direccion_clie = models.CharField(max_length=250, verbose_name="Dirección")

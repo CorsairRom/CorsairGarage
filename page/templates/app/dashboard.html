@@ -86,7 +86,7 @@
                     <div class="col-md-5 shadow rounded-4 l-bg-purple-dark">
                         <h4 class="text-center fs-5 mt-2">Consultar Cliente</h4>
                         <div class="form-floating mb-3 text-center text-dark">
-                            <input type="text" class="form-control border" id="buscarCliente" placeholder=" ">
+                            <input type="text" class="form-control border" id="buscarCliente" placeholder=" " onkeypress = 'return isNumber(event)' oninput = "checkRut(this)" maxlength= "12">
                             <label for="buscarCliente">Rut Cliente</label>
                             <!-- <button class="btn btn-outline-light mt-2" type="submit"
                                 name="btnConsultaCliente" id="ConsultarCli" onclick="captureInputrut(event)">Consultar</button> -->
@@ -160,5 +160,5 @@
     <!-- Modal -->
 </div>
 
-
+<script src="{% static 'js/app/check.js'%}"></script>
 {% endblock content %}
