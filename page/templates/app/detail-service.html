@@ -122,7 +122,7 @@
                                     <button type="submit" class="btn btn-dark">Agregar</button>
                                     {% if detalles %}
                                     <button type="button" class="btn btn-danger" name="continue">Generar OT</button>
-                                    <a href="{% url 'render_pdf_view' client.rut_cli Mbikes.patente_vh ficha %}" class="btn btn-danger">Imprimir ficha</a>
+                                    <a href="{% url 'render_pdf_view' client.rut_cli Mbikes.patente_vh ficha_id desc total totalFin %}" class="btn btn-danger">Imprimir ficha</a>
                                     {% endif %}
                                 </div>
                             </form>

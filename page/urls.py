@@ -18,5 +18,5 @@ urlpatterns = [
     path('generate-repair-order/<str:rut>/<str:patente>', generate_repair_order, name= "generate-repair-order"),
     path('detail-service/<str:rut>/<str:patente>/<int:ficha>', detail_service, name= "detail-service"),
     path('delete-detail/<str:id>/<str:rut>/<str:patente>/<int:ficha>', delete_detail, name= "delete-detail"),
-    path('render_pdf_view/<str:rut>/<str:patente>/<int:ficha>', render_pdf_view, name= "render_pdf_view"),
+    path('render_pdf_view/<str:rut>/<str:patente>/<int:ficha_id>/<int:desc>/<int:total>/<int:totalFinal>', render_pdf_view, name= "render_pdf_view"),
 ]

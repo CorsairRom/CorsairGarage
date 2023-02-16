@@ -301,11 +301,29 @@ def generate_repair_order(request, rut, patente):
     }
     return render(request, "app/generate-repair-order.html", data)
 
-def render_pdf_view(request, rut, patente, ficha):
+def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
+    ficha = Ficha_ingreso.objects.get(id=ficha_id)
+    client = Cliente.objects.get(rut_cli = rut)
+    detail = Detalle.objects.filter(id_fi= ficha_id)
+    calc_desc = 0
+    if desc > 0:
+        calc_desc = round(((total*desc)/100))
+    
     try:
         template_path = 'app/basespdf/ficha-ingreso-pdf.html'
         template = get_template(template_path)
-        context = {'myvar': 'this is your template context'}
+        context = {
+            'rut': rut,
+            'patente': patente,
+            'ficha': ficha,
+            'desc': desc,
+            'total': total,
+            'totalFinal' : totalFinal,
+            'client' : client,
+            'detail' : detail,
+            'valorDesc': calc_desc
+            
+        }
         html = template.render(context)
         response = HttpResponse(content_type='application/pdf')
         #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
