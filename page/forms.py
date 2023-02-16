@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import HoraHombre,Cliente, Detalle,Falla,Ficha_ingreso,Insumos,Orden_trabajo,Servicio,\
                     Trabajador,Vehiculo
+from page.Rut import validarRut
+from django.core.exceptions import ValidationError
+
 
 class H_HForm(forms.ModelForm):
     
@@ -36,6 +39,16 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = '__all__'
         exclude = ('usuario_cli',)
+        help_texts = {
+            'rut': ('Formato 12345678-9.'),
+        }
+        
+    def clean(self):
+        super(ClienteForm, self).clean()
+        ruts = self.cleaned_data.get('rut_cli')
+        if  validarRut(str(ruts)) == False:
+            self.errors['rut_cli'] = self.error_class(['Rut Inválido'])
+        return self.cleaned_data    
         
 class FallaForm(forms.ModelForm):
     
