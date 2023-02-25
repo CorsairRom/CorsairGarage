@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!hy-mjv*782h+5^vl8g#^%(w4wcr_x+cg(wk@v9h+re+7%^h2n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+# DEBUG = False
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = ['*']
 
@@ -128,5 +128,5 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, 'page/static')
+   os.path.join(BASE_DIR, 'static')
 ]
