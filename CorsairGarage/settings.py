@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!hy-mjv*782h+5^vl8g#^%(w4wcr_x
 #DEBUG = True
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['corsairgarage-production.up.railway.app']
 
 
 # Application definition
