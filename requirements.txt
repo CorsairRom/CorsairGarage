@@ -12,6 +12,7 @@ Django==4.1.5
 django-bootstrap5==22.1
 django-humanize==0.1.2
 django-mathfilters==1.0.0
+gunicorn==20.1.0
 html5lib==1.1
 humanize==4.4.0
 idna==3.4
