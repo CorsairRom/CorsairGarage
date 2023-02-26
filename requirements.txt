@@ -25,6 +25,7 @@ pyhanko-certvalidator==0.20.0
 pypdf==3.4.1
 pypng==0.20220715.0
 python-bidi==0.4.2
+python-dotenv==1.0.0
 pytz==2022.1
 pytz-deprecation-shim==0.1.0.post0
 PyYAML==6.0
