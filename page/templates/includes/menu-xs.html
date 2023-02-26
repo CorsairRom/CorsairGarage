@@ -1,0 +1,80 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+
+<div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-2 col-md-2 col-xl-2 px-sm-2 px-0 bg-dark bg-gradient">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-5 d-none d-sm-inline">DashBoard</span>
+            </a>
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <li class="nav-ite">
+                    <a href="{% url 'dashboard' %}" class="nav-link align-middle px-0 text-white">
+                        <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+                        <i class="fa-solid fa-folder-tree"></i> <span class="ms-1 d-none d-sm-inline">Ingreso</span> </a>
+                    <ul class="collapse show nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="{% url 'create-cliente' %}" class="nav-link px-0 text-info">
+                                <i class="fa-solid fa-user-group"></i> <span class="d-none d-sm-inline">Cliente</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 text-info"> 
+                                <i class="fa-solid fa-motorcycle"></i><span class="ms-1 d-none d-sm-inline">Vehículo</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle  text-light">
+                        <i class="fa-solid fa-laptop-file"></i><span class="ms-1 d-none d-sm-inline">Orden de trabajo</span></a>
+                </li>
+                <li>
+                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+                        <i class="fa-solid fa-warehouse"></i><span class="ms-1 d-none d-sm-inline">Servicios</span></a>
+                    <ul class="collapse nav flex-column ms-4" id="submenu2" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="{% url 'list-services' %}" class="nav-link px-0 text-info"><i class="fa-regular fa-rectangle-list"></i> <span class="d-none d-sm-inline">Lista</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'add-service' %}" class="nav-link px-0 text-info"><i class="fa-solid fa-pen-to-square"></i> <span class="d-none d-sm-inline">Agregar</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
+                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                        <li class="w-100">
+                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle">
+                        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                </li>
+            </ul>
+            <hr>
+        </div>
+    </div>
+    {% comment %} <div class="col py-3">
+        Content area...
+    </div> {% endcomment %}
+  </div>
+</div>
