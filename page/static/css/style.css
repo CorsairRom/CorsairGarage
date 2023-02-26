@@ -226,3 +226,12 @@ body {
     
 }
 
+@media only screen and (max-width: 771px) {
+    /* For mobile phones: */
+    .colpng{
+        max-width: 170px;
+    }
+    .imgquery{
+        display: none;
+    }
+  }
