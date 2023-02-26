@@ -242,4 +242,7 @@ body {
     .offcvXSmenu{
         display: block;
     }
+    .offcanvas{
+        max-width: 200px;
+    }
   }
