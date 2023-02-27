@@ -76,7 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'CorsairGarage.wsgi.application'
-
+CSRF_TRUSTED_ORIGINS = ['https://www.corsairgarage.cl', 'https://corsairgarage.cl', 'http://www.corsairgarage.cl', 'http://corsairgarage.cl']
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
