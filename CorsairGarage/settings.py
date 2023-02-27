@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -87,20 +88,23 @@ CSRF_TRUSTED_ORIGINS = ['https://www.corsairgarage.cl', 'https://corsairgarage.c
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
+DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'AXLqviHblluEhUwKZGJ6',
-        'HOST': 'containers-us-west-123.railway.app',
-        'PORT': '7459',
-        'OPTIONS': {
-            'charset': 'latin1'  # This is the relevant line
-        }
-    }
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'AXLqviHblluEhUwKZGJ6',
+#         'HOST': 'containers-us-west-123.railway.app',
+#         'PORT': '7459',
+#         'OPTIONS': {
+#             'charset': 'latin1'  # This is the relevant line
+#         }
+#     }
+# }
 
 
 
