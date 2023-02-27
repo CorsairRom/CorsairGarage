@@ -89,10 +89,23 @@ CSRF_TRUSTED_ORIGINS = ['https://www.corsairgarage.cl', 'https://corsairgarage.c
 #     }
 # }
 DATABASE_URL = os.getenv("DATABASE_URL")
+
 DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'AXLqviHblluEhUwKZGJ6',
+#         'HOST': 'containers-us-west-123.railway.app',
+#         'PORT': '7459',
+#         'OPTIONS': {
+#             'charset': 'latin1'  # This is the relevant line
+#         }
+#     }
+# }
 
 
 
