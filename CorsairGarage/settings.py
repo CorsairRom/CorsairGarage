@@ -24,8 +24,8 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = '!hy-mjv*782h+5^vl8g#^%(w4wcr_x+cg(wk@v9h+re+7%^h2n'
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!hy-mjv*782h+5^vl8g#^%(w4wcr_x+cg(wk@v9h+re+7%^h2n')
-
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!hy-mjv*782h+5^vl8g#^%(w4wcr_x+cg(wk@v9h+re+7%^h2n')
+SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
