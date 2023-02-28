@@ -244,8 +244,12 @@ body {
 
 }
 #map {
-    height: 100%;
-    width: 1000px;
+    height: 60vh;
+    width: 100%;
+    border: 1px solid red;
+}
+.mapa{
+    max-width: 80%;
 }
 @media only screen and (max-width: 771px) {
     /* For mobile phones: */
