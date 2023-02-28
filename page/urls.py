@@ -1,10 +1,11 @@
 from django.urls import path, include
-from page.views import add_service, delete_detail, detail_service, generate_repair_order, index, list_services, perfil, get_client,get_moto,create_client, \
+from page.views import add_service, delete_detail, detail_service, generate_repair_order, index, list_services, log_out, sign_in, get_client,get_moto,create_client, \
                        add_Mbike, dashboard, consulta_cliente, get_moto_rut, render_pdf_view, valve_service,view_bikes_client
 
 urlpatterns = [
     path('', index, name= "index"),
-    path('perfil/', perfil, name= "perfil"),
+    path('sign-in/', sign_in, name= "sign-in"),
+    path('log-out/', log_out, name= "log-out"),
     path('dashboard/', dashboard, name= "dashboard"),
     path('create-cliente/', consulta_cliente, name= "create-cliente"),
     path('valve-service/', valve_service, name= "valve-service"),

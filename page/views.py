@@ -7,23 +7,42 @@ from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # ----------------PAGE SECTION!--------------------------------
 
 def index(request):
 
     return render(request, "page/index.html")
 
+def sign_in(request):
+    data ={
+        "form" : AuthenticationForm()
+    }
+    if request.method =='POST':
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            name_user = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username = name_user, password = password)
+            if user is not None:
+                login(request, user)
+                return redirect(dashboard)
+    return render(request, 'registration/login.html', data)
 
-
+def log_out(request):
+    logout(request)
+    return redirect(index)
 
 # ----------------APP SECTION!--------------------------------
-
+@login_required()
 def dashboard(request):
     
     return render(request, "app/dashboard.html")
 
 #funcionando
+@login_required()
 def consulta_cliente(request):
     form = ClienteForm (request.POST or None)
     data = {
@@ -51,11 +70,8 @@ def consulta_cliente(request):
             return render(request, "app/create-cliente.html", {"form": form})
     return render(request, "app/create-cliente.html", data)
 
-def perfil(request):
-    
-    
-    return render(request, "page/perfil.html")
 
+#---------------------API SECTION!--------------------
 def get_client(_request, rut):
     # client = list(Cliente.objects.values())
     client = list(Cliente.objects.filter(rut_cli=rut).values())
@@ -83,7 +99,8 @@ def get_moto_rut(request, rut):
         data = {'message': "error"}
     
     return JsonResponse(data)
-
+#---------------------fin api--------------------
+@login_required()
 def create_client(request):
     form = ClienteForm (request.POST or None)
     data = {
@@ -109,6 +126,7 @@ def create_client(request):
             return render(request, "page/create-client.html", {"form": form2})   
     return render(request, "app/create-client.html", data)
 
+@login_required()
 def view_bikes_client(request, rut):
     Mbikes = Vehiculo.objects.filter(rut_cli = rut)
     client = Cliente.objects.get(rut_cli = rut)
@@ -142,6 +160,7 @@ def view_bikes_client(request, rut):
             data["form"] = form2 
     return render(request, "app/view-bikes-client.html", data)
 
+@login_required()
 def detail_service(request, rut, patente, ficha):
     form = DetalleForm(request.POST or None, initial={'id_fi': ficha})
     ficha_id = Ficha_ingreso.objects.get(id=ficha)
@@ -214,11 +233,13 @@ def detail_service(request, rut, patente, ficha):
             data["form"] = form2
     return render(request, "app/detail-service.html", data)
 
+@login_required()
 def delete_detail(request, id, rut, patente, ficha):
     detail = Detalle.objects.get(id=id)
     detail.delete()
     return redirect(detail_service, rut, patente, ficha)
 
+@login_required()
 def add_Mbike(request, rut):
     form = VehiculoForm(request.POST or None, initial={'rut_cli': rut})
     data = {
@@ -243,6 +264,7 @@ def add_Mbike(request, rut):
             data["form"] = form2
     return render(request, "app/add-Mbike.html", data)
 
+@login_required()
 def list_services(request):
     services = Servicio.objects.all()
     data = {
@@ -250,6 +272,7 @@ def list_services(request):
     }
     return render(request, "app/list-services.html", data)
 
+@login_required()
 def add_service(request):
     form = ServicioForm(request.POST or None)
     data = {
@@ -298,6 +321,7 @@ def add_service(request):
     
     return render(request, "app/add-service.html", data)
 
+@login_required()
 def generate_repair_order(request, rut, patente):
     form1 = OTForm(request.POST or None)
     form2 = Ficha_ingresoForm(request.POST or None)
@@ -309,6 +333,7 @@ def generate_repair_order(request, rut, patente):
     }
     return render(request, "app/generate-repair-order.html", data)
 
+@login_required()
 def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
     ficha = Ficha_ingreso.objects.get(id=ficha_id)
     client = Cliente.objects.get(rut_cli = rut)

@@ -41,10 +41,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Richard Romero</a>
+                            <a class="nav-link" aria-current="page" href="#">{{request.user.username}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Cerrar Sesión</a>
+                            <a class="nav-link active" aria-current="page" href=" {% url 'log-out' %}">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
