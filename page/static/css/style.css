@@ -228,6 +228,21 @@ body {
 .offcvXSmenu{
     display: none;
 }
+#spacelogin{
+    height: 40vh;
+}
+.nameform{
+    font-family: 'Oswald', sans-serif;
+    font-size: 35px;
+    font-weight: 300;
+    
+}
+.labelInput{
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+
+}
 @media only screen and (max-width: 771px) {
     /* For mobile phones: */
     .colpng{

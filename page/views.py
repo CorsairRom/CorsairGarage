@@ -2,7 +2,7 @@ import os
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
-from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm
+from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm, Form_login
 from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -18,10 +18,10 @@ def index(request):
 
 def sign_in(request):
     data ={
-        "form" : AuthenticationForm()
+        "form" : Form_login()
     }
     if request.method =='POST':
-        form = AuthenticationForm(request, data = request.POST)
+        form = Form_login(request, data = request.POST)
         if form.is_valid():
             name_user = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')

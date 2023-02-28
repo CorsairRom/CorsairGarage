@@ -1,9 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 from .models import HoraHombre,Cliente, Detalle,Falla,Ficha_ingreso,Insumos,Orden_trabajo,Servicio,\
                     Trabajador,Vehiculo
 from page.Rut import validarRut
 from django.core.exceptions import ValidationError
+
+
+class Form_login(AuthenticationForm):
+    
+    class Meta:
+        model = User
+        field = ['username', 'password',]
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs) 
+        self.fields['username'].label = 'Usuario'   
+        self.fields['password'].label = 'Contraseña'  
 
 
 class H_HForm(forms.ModelForm):
