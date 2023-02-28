@@ -1,10 +1,17 @@
-let map;
+
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
+    const myLatLng = { lat: -36.7889240, lng: -73.08891  };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        center: myLatLng,
+        zoom: 16,
+    });
+    new google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "Corsair Garage",
+    });
+    
 }
 
 window.initMap = initMap;

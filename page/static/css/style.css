@@ -246,7 +246,6 @@ body {
 #map {
     height: 60vh;
     width: 100%;
-    border: 1px solid red;
 }
 .mapa{
     max-width: 80%;
