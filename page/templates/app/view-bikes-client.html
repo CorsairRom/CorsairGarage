@@ -21,8 +21,8 @@
                             <div class="">
                                 <a href="{% url 'add-Mbike' client.rut_cli  %}" class="btn btn-warning">Registrar nueva motocicleta</a>
                             </div>
-                            <div class="">
-                                <table class="table table-striped">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
                                     <thead>
                                         <tr>
                                             <th scope="col">Patente</th>
@@ -41,11 +41,11 @@
                                             <td>{{bike.cilindrada_vh}}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-dark"
+                                                    <button type="button" class="btn btn-sm btn-dark"
                                                         data-arg1="{{bike.patente_vh}}" onclick="data(this)"
-                                                        id="{{bike.patente_vh}}">Nueva OT</button>
+                                                        id="{{bike.patente_vh}}">Ingresar</button>
                                                     <button type="button"
-                                                        class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                                        class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
                                                         <span class="visually-hidden">Toggle Dropdown</span>
                                                     </button>
