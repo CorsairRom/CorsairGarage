@@ -225,4 +225,43 @@ body {
     right: 0px;
     
 }
+.offcvXSmenu{
+    display: none;
+}
+#spacelogin{
+    height: 40vh;
+}
+.nameform{
+    font-family: 'Oswald', sans-serif;
+    font-size: 35px;
+    font-weight: 300;
+    
+}
+.labelInput{
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
 
+}
+#map {
+    height: 100%;
+    width: 1000px;
+}
+@media only screen and (max-width: 771px) {
+    /* For mobile phones: */
+    .colpng{
+        max-width: 170px;
+    }
+    .imgquery{
+        display: none;
+    }
+    .sideXL{
+        display: none;
+    }
+    .offcvXSmenu{
+        display: block;
+    }
+    .offcanvas{
+        max-width: 200px;
+    }
+  }

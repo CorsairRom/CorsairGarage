@@ -10,11 +10,14 @@ from django.contrib.staticfiles import finders
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from dotenv import load_dotenv
 # ----------------PAGE SECTION!--------------------------------
 
 def index(request):
-
-    return render(request, "page/index.html")
+    data ={
+        'GOOGLE_MAPS_API_KEY': os.getenv('GOOGLE_MAPS_API_KEY')
+    }
+    return render(request, "page/index.html", data)
 
 def sign_in(request):
     data ={
