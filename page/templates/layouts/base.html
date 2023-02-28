@@ -53,21 +53,18 @@
             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Acerca de</a>
+            <a class="nav-link" href="#scrollspyHeading1">Nosotros</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="#">Servicios</a>
+            <a class="nav-link " href="#scrollspyHeading2">Servicios</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Galeria</a>
+            <a class="nav-link" href="#scrollspyHeading3">Ubicación</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" href="#scrollspyHeading4">Contacto</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item mx-4">
@@ -101,11 +98,11 @@
   <!-- Footer -->
   <footer class="bg-dark text-center text-white">
     <!-- Grid container -->
-    <div class="container p-4">
+    <div class="container p-4" id="scrollspyHeading4">
       <!-- Section: Social media -->
       <section class="mb-4">
         <!-- Facebook -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/cxgarage" role="button"><i class="fab fa-facebook-f"></i></a>
 
         <!-- Twitter -->
         <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
@@ -142,7 +139,10 @@
                 <i class="fa-solid fa-wrench me-4"></i>Corsair Garage
               </h6>
               <p>
-                En nuestro taller nos preocupamos de entregar servicios de calidad y garantizado, con seguimiento y documentacion de todos nuestros trabajos para su seguridad y tranquilidad
+                En nuestro taller, nos esforzamos por brindar servicios de alta calidad y garantizados.
+                 Para lograrlo, llevamos a cabo un seguimiento riguroso y documentación detallada de todos 
+                 nuestros trabajos, utilizando técnicas y herramientas de vanguardia con personal altamente
+                  capacitados y comprometidos con la satisfacción de nuestros clientes
               </p>
             </div>
             <!-- Grid column -->
@@ -218,8 +218,8 @@
       <p><i class="fa-solid fa-feather"></i> Powered by</p>
       <a class="text-white" href=""><i class="fa-solid fa-terminal"></i> Richard Romero</a>
     </div>
-    <i class="fa-solid fa-screwdriver-wrench"><span> </span> alpha version</i>
-    <p>some features are not yet available</p>
+    <i class="fa-solid fa-screwdriver-wrench"><span> </span> Beta Version</i>
+    <p>new features coming soon</p>
   </footer>
   <!-- Footer -->
 
