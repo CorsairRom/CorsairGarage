@@ -157,8 +157,8 @@
                 </div>
                 <div class="modal-footer" id="footerModal">
                     <button type="button" class="btn btn-secondary"><a href="{% url 'dashboard' %}">Cerrar</a></button>
-                    <button type="button" class="btn btn-dark"><a
-                            href="{% url 'create-cliente' %}">Registrar</a></button>
+                    <button type="button" class="btn btn-dark" onclick="registerQuery(event)" ><a
+                            href="" id="btnRegister">Registrar</a></button>
                 </div>
             </div>
         </div>
@@ -167,4 +167,7 @@
 </div>
 
 <script src="{% static 'js/app/check.js'%}"></script>
+<script>
+  
+</script>
 {% endblock content %}

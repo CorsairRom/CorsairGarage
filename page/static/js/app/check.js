@@ -79,3 +79,10 @@ function clean (rut) {
     ? rut.replace(/^0+|[^0-9kK]+/g, '').toUpperCase()
     : ''
 }
+
+
+function registerQuery(evt){
+  let rut = $('#buscarCliente').val();
+  let geturl = `/create-cliente/${rut}`
+  $('#btnRegister').attr('href', geturl);
+}

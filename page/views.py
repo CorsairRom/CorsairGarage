@@ -46,8 +46,8 @@ def dashboard(request):
 
 #funcionando
 @login_required()
-def consulta_cliente(request):
-    form = ClienteForm (request.POST or None)
+def consulta_cliente(request, rut2):
+    form = ClienteForm (request.POST or None, initial={'rut_cli': rut2})
     data = {
         "form" : form   
     } 
@@ -103,31 +103,33 @@ def get_moto_rut(request, rut):
     
     return JsonResponse(data)
 #---------------------fin api--------------------
-@login_required()
-def create_client(request):
-    form = ClienteForm (request.POST or None)
-    data = {
-        "form" : form
-    }
-    if request.method == "POST":
-        form2 = ClienteForm(request.POST)
-        if form2.is_valid():
-            form2.save(commit=False)
-            datos = form2.cleaned_data
-            client = Cliente()
-            rut = datos.get("rut_cli")
-            client.rut_cli = rut
-            client.nombre_cli = datos.get("nombre_cli")
-            client.apellido_cli = datos.get("apellido_cli")
-            client.direccion_clie = datos.get("direccion_clie")
-            client.celular_cli = datos.get("celular_cli")
-            client.save()
-            print(rut)
-            return redirect(add_Mbike, rut)
-            #aqui falta el return render para que no se duplique
-        else:
-            return render(request, "page/create-client.html", {"form": form2})   
-    return render(request, "app/create-client.html", data)
+
+# @login_required()
+#----------------------borrar-------------
+# def create_client(request, rut2):
+#     form = ClienteForm (request.POST or None, initial={'rut': rut2})
+#     data = {
+#         "form" : form
+#     }
+#     if request.method == "POST":
+#         form2 = ClienteForm(request.POST)
+#         if form2.is_valid():
+#             form2.save(commit=False)
+#             datos = form2.cleaned_data
+#             client = Cliente()
+#             rut = datos.get("rut_cli")
+#             client.rut_cli = rut
+#             client.nombre_cli = datos.get("nombre_cli")
+#             client.apellido_cli = datos.get("apellido_cli")
+#             client.direccion_clie = datos.get("direccion_clie")
+#             client.celular_cli = datos.get("celular_cli")
+#             client.save()
+#             print(rut)
+#             return redirect(add_Mbike, rut)
+#             #aqui falta el return render para que no se duplique
+#         else:
+#             return render(request, "page/create-client.html", {"form": form2})   
+#     return render(request, "app/create-client.html", data)
 
 @login_required()
 def view_bikes_client(request, rut):

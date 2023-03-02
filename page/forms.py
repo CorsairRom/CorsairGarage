@@ -7,6 +7,18 @@ from page.Rut import validarRut
 from django.core.exceptions import ValidationError
 
 
+
+class query_rut(forms.ModelForm):
+    rut = forms.CharField(max_length=12)
+    
+    def clean(self):
+        super(query_rut, self).clean()
+        ruts = self.cleaned_data.get('rut_cli')
+        if  validarRut(str(ruts)) == False:
+            self.errors['rut_cli'] = self.error_class(['Rut Inválido'])
+        return self.cleaned_data
+
+
 class Form_login(AuthenticationForm):
     
     class Meta:
