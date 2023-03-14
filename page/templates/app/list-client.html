@@ -1,0 +1,81 @@
+{% extends 'layouts/base-dashboard.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        {% include "includes/sidebar.html" %}
+        <div class="col mt-2">
+            <div class="row">
+                <div class="container">
+                    <div class="col-12 col-md-12  mt-3 border rounded-5 shadow p-3 mb-4">
+                        <div class="text-center">
+                            <h4>Clientes</h4>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-fluid" id="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="min-width: 72px;">Rut</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Celular</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cliente in clientes %}
+                                    <tr>
+                                        <td scope="row">{{cliente.rut_cli}}</td>
+                                        <td>{{cliente.nombre_cli}}</td>
+                                        <td>{{cliente.apellido_cli}}</td>
+                                        <td>{{cliente.celular_cli}}</td>
+                                        <td>
+                                            <div class="dropdown-center">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa-solid fa-bars"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <div class="d-inline-flex">
+                                                        <li class="d-inline-flex">
+                                                            <a class="dropdown-item " href="{% url 'view-bikes-client' cliente.rut_cli %}">
+                                                                <button type="button" class="btn btn-dark btn-sm"><i
+                                                                        class="fa-solid fa-motorcycle"></i></button>
+                                                            </a>
+                                                        </li>
+                                                        <li class="d-inline-flex">
+                                                            <a class="dropdown-item " href="#">
+                                                                <button type="button" class="btn btn-info btn-sm"><i
+                                                                        class="fa-solid fa-user-gear"></i></button>
+                                                            </a>
+                                                        </li>
+                                                        <li class="d-inline-flex">
+                                                            <a class="dropdown-item " href="#">
+                                                                <button type="button" class="btn btn-danger btn-sm"><i
+                                                                        class="fa-solid fa-trash"></i></button>
+                                                            </a>
+                                                        </li>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tabl').DataTable();
+    });
+</script>
+{% endblock content %}

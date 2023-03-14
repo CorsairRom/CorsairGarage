@@ -380,6 +380,16 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
         pass
     return redirect(dashboard)
 
+def list_client(request):
+    clientes = Cliente.objects.all()
+    data = {
+        'clientes' : clientes
+    }
+    return render(request, "app/list-client.html", data )
+
+
+
+
 def valve_service(request):
     
     return render(request,'app/valve-service.html')
