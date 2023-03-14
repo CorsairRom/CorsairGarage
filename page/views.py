@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from dotenv import load_dotenv
+import json
 # ----------------PAGE SECTION!--------------------------------
 
 def index(request):
@@ -41,7 +42,13 @@ def log_out(request):
 # ----------------APP SECTION!--------------------------------
 @login_required()
 def dashboard(request):
-    
+    if request.method == 'GET':
+        patente = request.GET.get('buscarPatente', None)
+        if patente is not None and len(patente) > 4:
+           data = Vehiculo.objects.get(patente_vh=patente)
+           rut = str(data.rut_cli)
+           return redirect(view_bikes_client, rut)
+        
     return render(request, "app/dashboard.html")
 
 #funcionando
