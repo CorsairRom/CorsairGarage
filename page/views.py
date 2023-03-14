@@ -387,6 +387,12 @@ def list_client(request):
     }
     return render(request, "app/list-client.html", data )
 
+def list_motos(request):
+    motos = Vehiculo.objects.all()
+    data = {
+        'motos' : motos
+    }
+    return render(request, "app/list-bike.html", data)
 
 
 

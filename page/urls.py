@@ -1,6 +1,6 @@
 from django.urls import path, include
 from page.views import add_service, delete_detail, detail_service, generate_repair_order, index, list_services, log_out, sign_in, get_client,get_moto, \
-                       add_Mbike, dashboard, consulta_cliente, get_moto_rut, render_pdf_view, valve_service,view_bikes_client, list_client
+                       add_Mbike, dashboard, consulta_cliente, get_moto_rut, render_pdf_view, valve_service,view_bikes_client, list_client, list_motos
 
 urlpatterns = [
     path('', index, name= "index"),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('add-service/', add_service, name= "add-service"),
     path('list-services/', list_services, name= "list-services"),
     path('list-client/', list_client, name= "list-client"),
+    path('list-motos/', list_motos, name= "list-motos"),
     path('get_client/<str:rut>', get_client, name= "get_client"),
     path('get_moto/<str:patente>', get_moto, name= "get_moto"),
     path('get_moto_rut/<str:rut>', get_moto_rut, name= "get_moto_rut"),

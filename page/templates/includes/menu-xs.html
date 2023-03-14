@@ -22,11 +22,11 @@
                         <i class="fa-solid fa-folder-tree"></i> <span class="ms-1 d-sm-inline">Datos</span> </a>
                     <ul class="collapse show nav flex-column ms-4" id="submenu1" data-bs-parent="#menu">
                         <li class="w-100">
-                            <a href="#" class="nav-link px-0 text-info">
+                            <a href="{% url 'list-client' %}" class="nav-link px-0 text-info">
                                 <i class="fa-solid fa-user-group"></i> <span class="d-sm-inline">Cliente</span></a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 text-info"> 
+                            <a href="{% url 'list-motos' %}" class="nav-link px-0 text-info"> 
                                 <i class="fa-solid fa-motorcycle"></i><span class="ms-1 d-sm-inline">Vehículo</span></a>
                         </li>
                     </ul>
