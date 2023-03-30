@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow  mb-4">
+                        <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow mb-4">
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
@@ -127,6 +127,36 @@
                                 </div>
                             </form>
                             <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow mb-4">
+                            <h5 class="text-center">Repuestos o insumos</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cant.</th>
+                                        <th scope="col">Valor Un</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for detalle in detalles %}
+                                    <tr>
+                                        <td scope="row">{{detalle.id}}</td>
+                                        <td>{{detalle.id_sv}}</td>
+                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}
+                                        </td>
+                                        <td>${{detalle.precio_servicio|intcomma}}</td>
+                                        <td><a
+                                                href="{% url 'delete-detail' detalle.id client.rut_cli Mbikes.patente_vh ficha %}"><i
+                                                    class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

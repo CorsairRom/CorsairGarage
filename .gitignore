@@ -2,3 +2,4 @@
 data.json
 .gitignore
 db.json
+__pycache__/

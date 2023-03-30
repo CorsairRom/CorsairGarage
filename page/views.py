@@ -336,12 +336,8 @@ def add_service(request):
 @login_required()
 def generate_repair_order(request, rut, patente):
     form1 = OTForm(request.POST or None)
-    form2 = Ficha_ingresoForm(request.POST or None)
-    form3 = DetalleForm(request.POST or None)
     data = {
-        "form1" : form1,
-        "form2" : form2,
-        "form3" : form3,
+        "form1" : form1
     }
     return render(request, "app/generate-repair-order.html", data)
 
