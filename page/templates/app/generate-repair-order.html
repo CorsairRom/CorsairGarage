@@ -2,6 +2,8 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% block content %}
+{% load humanize %}
+{% load mathfilters %}
 <div class="container-fluid">
     <div class="row">
         {% include "includes/sidebar.html" %}
@@ -11,11 +13,32 @@
                     <div class="row">  
                         <div class="col-12 col-md-6 offset-md-3 mt-3 border rounded shadow p-3 mb-4">
                             <h3 class="display-6 text-center">Orden de trabajo</h3>
+                            <br>
+                            <h5 class="text-center">Servicios</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Nombre servicio</th>
+                                        <th scope="col">Horas</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for detalle in detalles %}
+                                    <tr>
+                                        <td scope="row">{{detalle.id}}</td>
+                                        <td>{{detalle.id_sv}}</td>
+                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}
+                                        </td>
+                                        <td>${{detalle.precio_servicio|intcomma}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {% bootstrap_form form1 %}     
-                                {% bootstrap_form form2 %}     
-                                {% bootstrap_form form3 %}     
                                 <button type="submit" class="btn btn-dark">Crear OT</button>
                             </form>
                             <br>

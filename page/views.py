@@ -12,12 +12,15 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from dotenv import load_dotenv
 import json
+
+
 # ----------------PAGE SECTION!--------------------------------
 
 def index(request):
     data ={
         'GOOGLE_MAPS_API_KEY': os.getenv('GOOGLE_MAPS_API_KEY')
     }
+    
     return render(request, "page/index.html", data)
 
 def sign_in(request):
@@ -334,10 +337,14 @@ def add_service(request):
     return render(request, "app/add-service.html", data)
 
 @login_required()
-def generate_repair_order(request, rut, patente):
+def generate_repair_order(request, rut, patente, ficha_id):
     form1 = OTForm(request.POST or None)
+    client = Cliente.objects.get(rut_cli = rut)
+    Mbike = Vehiculo.objects.get(patente_vh = patente)
+    detalles = Detalle.objects.filter(id_fi = ficha_id) 
     data = {
-        "form1" : form1
+        "form1" : form1,
+        "detalles" : detalles
     }
     return render(request, "app/generate-repair-order.html", data)
 
