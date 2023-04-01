@@ -15,19 +15,19 @@
         text-transform: uppercase;
     }
 
-    #invoice thead tr th {
+    .invoice thead tr th {
         text-align: center;
         border-bottom: 1px solid black;
         border-top: 1px solid black;
         padding-top: 4px;
     }
 
-    #invoice thead tr {
+    .invoice thead tr {
         margin-bottom: 0;
         padding-bottom: 0;
     }
 
-    #invoice tbody tr {
+    .invoice tbody tr {
         padding: 0;
     }
 
@@ -76,7 +76,7 @@
 <p>
     <b>MOTIVO DE INGRESO:</b> {{ ficha.observaciones_fi}}
 </p>
-<table id="invoice">
+<table class="invoice">
     <thead>
     <tr>
         <th style="width: 15%; text-align: left;">CÓDIGO</th>
@@ -107,15 +107,49 @@
     </tr>
     <tr style="padding-top: 0px;">
         <td colspan="4"><b>TOTAL A PAGAR</b></td>
-        <td style="text-align: right">${{ totalFinal|intcomma }}</td>
+        <td style="text-align: right; font-weight: bold;">${{ totalFinal|intcomma }}</td>
     </tr>
     </tbody>
+    
 </table>
-<table style="margin-top: 250px;">
+{% if insumos %}
+<table>
+    <h4 class="text-center">REPUESTOS</h4>
+    <table class="invoice">
+        <thead>
+        <tr>
+            <th style="width: 15%; text-align: left;">CÓDIGO</th>
+            <th style="width: 50%; text-align: left;">NOMBRE</th>
+            <th style="width: 10%; text-align: left;">CANTIDAD</th>
+            <th style="width: 10%;">VALOR UN</th>
+            <th style="width: 15%; text-align: right;">VALOR</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in insumos %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td>{{ i.codigo_is_externo }}</td>
+                <td>{{ i.nombre_is}}</td>
+                <td class="text-center">{{ i.cantidad_is }}</td>
+                <td class="text-center">{{i.precio_is_unitario|intcomma}}</td>
+                <td style="text-align: right;">${{i.precio_total|intcomma}}</td>
+            </tr>
+        {% endfor %}
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td colspan="4"><b>TOTAL REPUESTOS</b></td>
+            <td style="text-align: right; font-weight: bold;" >${{ totalInsumos|intcomma }}</td>
+        </tr>
+        </tbody>
+    </table>
+</table>
+{% endif %}
+
+<table  {% if insumos %}  style="margin-top: 20px;" {% endif %} style="margin-top: 250px;">
     <thead>
     <tr >
-        <th class="pb-2">****Este documento es temporal y esta sujeto a cambios ****</th>
+        <th class="pb-1">****Este documento es temporal y esta sujeto a cambios ****</th>
     </tr>
+    {% if insumos.count < 12 %} 
     <tr>
         <th class="text-left pb-1">1. Corsair Garage no ofrece garantía por repuestos alternativos, este tipo de repuestos pasa por una revisión visual y funcional antes de la instalación, pero no se asegura su duración.</th>
     </tr>
@@ -126,8 +160,9 @@
         <th class="text-left pb-1">3. Los vehículos deben ser retirados en un periodo de no más de 3 días luego de la finalización
             del o los servicios completados, luego de este periodo se aplican multas de 11.000 pesos por día</th>
     </tr>
-    
+    {% endif %} 
     </thead>
 </table>
+
 </body>
 </html>

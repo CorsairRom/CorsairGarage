@@ -188,9 +188,9 @@ def detail_service(request, rut, patente, ficha):
     totalFin = 0
     desc = 0
     totInsumos = 0
-    
-    for insTotal in insumos:
-        totInsumos += insTotal.precio_total 
+    if insumos:
+        for insTotal in insumos:
+            totInsumos += insTotal.precio_total 
     
     for detalle in detalles:
         total += detalle.precio_servicio
@@ -389,6 +389,13 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
     client = Cliente.objects.get(rut_cli = rut)
     detail = Detalle.objects.filter(id_fi= ficha_id)
     bike = Vehiculo.objects.get(patente_vh = patente)
+    insumos = Insumos.objects.filter(id_fi= ficha_id)
+    
+    totalInsumos = 0
+    if insumos:
+        for i in insumos:
+            totalInsumos += i.precio_total
+          
     calc_desc = 0
     if desc > 0:
         calc_desc = round(((total*desc)/100))
@@ -406,7 +413,9 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
             'client' : client,
             'detail' : detail,
             'valorDesc': calc_desc,
-            'bike' : bike
+            'bike' : bike,
+            'insumos' : insumos,
+            'totalInsumos' : totalInsumos
             
         }
         html = template.render(context)
