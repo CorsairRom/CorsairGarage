@@ -73,16 +73,13 @@
     <b>MODELO:</b> {{ bike.modelo_vh }}<br>
     <b>{{ficha.mill_km_vh}}:</b> {{ ficha.km_mill_fi|intcomma }}<br>
 </p>
-<p>
-    <b>MOTIVO DE INGRESO:</b> {{ ficha.observaciones_fi}}
-</p>
 <table id="invoice">
     <thead>
     <tr>
         <th style="width: 15%; text-align: left;">CÓDIGO</th>
-        <th style="width: 15%; text-align: left;">SERVICIO</th>
-        <th style="width: 50%;">DESCRIPCIÓN</th>
-        <th style="width: 10%;">HORAS</th>
+        <th style="width: 50%; text-align: left;">NOMBRE</th>
+        <th style="width: 15%;">CANTIDAD</th>
+        <th style="width: 10%;">VALOR UN</th>
         <th style="width: 10%; text-align: right;">VALOR</th>
     </tr>
     </thead>

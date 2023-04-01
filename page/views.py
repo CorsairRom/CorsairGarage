@@ -1,8 +1,8 @@
 import os
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
-from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio
-from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm, Form_login
+from .models import Cliente, Detalle, Ficha_ingreso, HoraHombre, Vehiculo, Servicio, Insumos
+from .forms import ClienteForm, DetalleForm, Ficha_ingresoForm, OTForm, ServicioForm, VehiculoForm, buscarRut, Vehiculo_change_kmForm, Form_login,InsumosForm
 from django.conf import settings
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -182,9 +182,16 @@ def detail_service(request, rut, patente, ficha):
     detalles = Detalle.objects.filter(id_fi = ficha)
     Mbikes = Vehiculo.objects.get(patente_vh = patente)
     client = Cliente.objects.get(rut_cli = rut)
+    insumosForm = InsumosForm(request.POST or None, initial={'id_fi':ficha})
+    insumos = Insumos.objects.filter(id_fi = ficha)
     total = 0
     totalFin = 0
     desc = 0
+    totInsumos = 0
+    
+    for insTotal in insumos:
+        totInsumos += insTotal.precio_total 
+    
     for detalle in detalles:
         total += detalle.precio_servicio
     data = {
@@ -196,7 +203,10 @@ def detail_service(request, rut, patente, ficha):
         "total":total,
         "totalFin":totalFin,
         "ficha_id": ficha_id,
-        "desc": desc
+        "desc": desc,
+        "insumosForm" : insumosForm,
+        "insumos" : insumos,
+        "totalInsumos" : totInsumos
     }
     if totalFin ==0:
         data["totalFin"] = total
@@ -231,7 +241,7 @@ def detail_service(request, rut, patente, ficha):
             return round(int(precio))
         precio = 10000
         return precio
-    if request.method == "POST":
+    if request.method == "POST" and 'addServices' in request.POST:
         form2 = DetalleForm(request.POST)
         if form2.is_valid():
             form2.save(commit=False)
@@ -246,12 +256,37 @@ def detail_service(request, rut, patente, ficha):
             return redirect(detail_service, rut, patente, ficha)
         else:
             data["form"] = form2
+    if request.method == "POST" and 'addSpare' in request.POST:
+        formIns = InsumosForm(request.POST)
+        if formIns.is_valid():
+            formIns.save(commit=False)
+            dataIns = formIns.cleaned_data
+            ins = Insumos()
+            ins.codigo_is_externo = dataIns.get("codigo_is_externo")
+            ins.nombre_is = dataIns.get("nombre_is")
+            ins.cantidad_is = dataIns.get("cantidad_is")
+            ins.precio_is_unitario = dataIns.get("precio_is_unitario")
+            ins.precio_total = dataIns.get("precio_is_unitario") * dataIns.get("cantidad_is")
+            ins.id_fi = ficha_id
+            ins.save()
+            return redirect(detail_service, rut, patente, ficha)
+        else:
+            data["insumosForm"] = formIns
+        
     return render(request, "app/detail-service.html", data)
 
+
+# ---------------delete section----------------
 @login_required()
 def delete_detail(request, id, rut, patente, ficha):
     detail = Detalle.objects.get(id=id)
     detail.delete()
+    return redirect(detail_service, rut, patente, ficha)
+
+@login_required()
+def delete_spare(reques, id, rut, patente, ficha):
+    spare = Insumos.objects.get(id=id)
+    spare.delete()
     return redirect(detail_service, rut, patente, ficha)
 
 @login_required()

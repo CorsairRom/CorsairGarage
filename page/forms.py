@@ -65,7 +65,7 @@ class ClienteForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('usuario_cli',)
         help_texts = {
-            'rut': ('Formato 12345678-9.'),
+            'rut': ('Formato 12.345.678-9.'),
         }
         
     def clean(self):
@@ -86,6 +86,7 @@ class InsumosForm(forms.ModelForm):
     class Meta:
         model = Insumos
         fields = '__all__'
+        exclude = ('id_fi','precio_total')
         
 class OTForm(forms.ModelForm):
     

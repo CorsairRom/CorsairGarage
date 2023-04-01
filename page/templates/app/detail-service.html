@@ -119,7 +119,7 @@
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-dark">Agregar</button>
+                                    <button type="submit" class="btn btn-dark" name="addServices">Agregar</button>
                                     {% if detalles %}
                                     <button type="button" class="btn btn-danger" name="continue">Generar OT</button>
                                     <a href="{% url 'render_pdf_view' client.rut_cli Mbikes.patente_vh ficha_id desc total totalFin %}" class="btn btn-danger">Imprimir ficha</a>
@@ -132,6 +132,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow mb-4">
                             <h5 class="text-center">Repuestos o insumos</h5>
+                            
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -140,23 +141,50 @@
                                         <th scope="col">Cant.</th>
                                         <th scope="col">Valor Un</th>
                                         <th scope="col">Valor</th>
+                                        <th scope="col"><i class="fa-solid fa-ellipsis-vertical mx-2"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for detalle in detalles %}
-                                    <tr>
-                                        <td scope="row">{{detalle.id}}</td>
-                                        <td>{{detalle.id_sv}}</td>
-                                        <td>{{detalle.precio_servicio|div:detalle.id_sv.id_hh.precio_hh|floatformat}}
+                                    {% if not insumos %}
+                                    <tr class="text-center">
+                                        <td colspan="5">
+                                            <h5>Sin Repuestos agregado!</h5>
                                         </td>
-                                        <td>${{detalle.precio_servicio|intcomma}}</td>
-                                        <td><a
-                                                href="{% url 'delete-detail' detalle.id client.rut_cli Mbikes.patente_vh ficha %}"><i
-                                                    class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
                                     </tr>
-                                    {% endfor %}
+                                        {% else %}
+                                    <tr>
+                                            {% for ins in insumos %}
+                                            <td scope="row">{{ins.codigo_is_externo}}</td>
+                                            <td>{{ins.nombre_is}}</td>
+                                            <td>{{ins.cantidad_is}}</td>
+                                            <td>${{ins.precio_is_unitario|intcomma}}</td>
+                                            <td>${{ins.precio_total|intcomma}}</td>  
+                                            <td><a
+                                                href="{% url 'delete-spare' ins.id client.rut_cli Mbikes.patente_vh ficha %}"><i
+                                                    class="fa-solid fa-trash-can btn btn-danger btn-sm"></i></a></td>
+                                            
+                                      
+                                    </tr>
+                                            {% endfor %}
+                                        {% endif %}
                                 </tbody>
                             </table>
+                            <div class="row text-center">
+                                <div class="col mb-4">
+                                    <h5>Total: ${{totalInsumos|intcomma}}</h5>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 offset-md-3 pt-3 border rounded shadow mb-4">
+                            <h5 class="text-center">Agregar Insumos</h5>
+                            <form action=""  method="POST" class="mb-4">
+                                {% csrf_token %}
+                                {% bootstrap_form insumosForm %}
+                                <button type="submit" class="btn btn-dark" name="addSpare">Agregar</button>
+                            </form>
                         </div>
                     </div>
                 </div>

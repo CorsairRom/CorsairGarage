@@ -1,5 +1,5 @@
 from django.urls import path, include
-from page.views import add_service, delete_detail, detail_service, generate_repair_order, index, list_services, log_out, sign_in, get_client,get_moto, \
+from page.views import add_service, delete_detail, delete_spare, detail_service, generate_repair_order, index, list_services, log_out, sign_in, get_client,get_moto, \
                        add_Mbike, dashboard, consulta_cliente, get_moto_rut, render_pdf_view, valve_service,view_bikes_client, list_client, list_motos
 
 urlpatterns = [
@@ -22,5 +22,6 @@ urlpatterns = [
     path('generate-repair-order/<str:rut>/<str:patente>/<int:ficha_id>', generate_repair_order, name= "generate-repair-order"),
     path('detail-service/<str:rut>/<str:patente>/<int:ficha>', detail_service, name= "detail-service"),
     path('delete-detail/<str:id>/<str:rut>/<str:patente>/<int:ficha>', delete_detail, name= "delete-detail"),
+    path('delete-spare/<str:id>/<str:rut>/<str:patente>/<int:ficha>', delete_spare, name= "delete-spare"),
     path('render_pdf_view/<str:rut>/<str:patente>/<int:ficha_id>/<int:desc>/<int:total>/<int:totalFinal>', render_pdf_view, name= "render_pdf_view"),
 ]

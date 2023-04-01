@@ -3,3 +3,4 @@ data.json
 .gitignore
 db.json
 __pycache__/
+*.pyc
