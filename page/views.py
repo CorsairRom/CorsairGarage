@@ -75,11 +75,11 @@ def consulta_cliente(request, rut2):
             client.direccion_clie = datos.get("direccion_clie")
             client.celular_cli = datos.get("celular_cli")
             client.save()
-            print('--------------------')
-            print(rut)
+            # print('--------------------')
+            # print(rut)
             return redirect(add_Mbike, rut)   
         else:
-            print('invalido el form')
+            # print('invalido el form')
             return render(request, "app/create-cliente.html", {"form": form})
     return render(request, "app/create-cliente.html", data)
 
