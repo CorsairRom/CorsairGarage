@@ -3,7 +3,7 @@ Esta es una pagina creada para mi taller, donde actualmente presto servicios de 
 
 ## Inicio
 
-![App Screenshot](https://i.postimg.cc/kGHBcggD/imagen-2022-12-21-175952674.png)
+![App Screenshot](https://i.postimg.cc/6pVX090j/imagen-2023-04-25-011816140.png)
 
 ![App Screenshot](https://i.postimg.cc/T2BbgtL0/imagen-2022-12-21-180057857.png)
 
@@ -14,8 +14,16 @@ Esta es una pagina creada para mi taller, donde actualmente presto servicios de 
 <p> tenga una idea clara de cuanto es el costo de reparacion de su motocicleta.  </p>
 
 
+## Inicio Sesion
+
+<p>Podemos Dirigirnos al inicio sesion precionando en el icono de persona: </p>
+
+![App Screenshot](https://i.postimg.cc/fbvr3yKs/imagen-2023-04-25-011513924.png)
 
 
+<p>Ingresamos nuestras crendencias, iniciamos sesion y si nuestras credenciales son validas se nos redirigira al dashboard </p>
+
+![App Screenshot](https://i.postimg.cc/NFZJhHg6/imagen-2023-04-25-011606475.png)
 
 ## Dashboard
 <p>La pagina sigue avanzando esta ves agregandon un dashboard con distintas funcionalidades, como la de registrar clientes, motocicletas y fichas de ingreso.</p>
