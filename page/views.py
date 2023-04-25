@@ -372,16 +372,13 @@ def add_service(request):
     return render(request, "app/add-service.html", data)
 
 @login_required()
-def generate_repair_order(request, rut, patente, ficha_id):
-    form1 = OTForm(request.POST or None)
-    client = Cliente.objects.get(rut_cli = rut)
-    Mbike = Vehiculo.objects.get(patente_vh = patente)
-    detalles = Detalle.objects.filter(id_fi = ficha_id) 
+def list_repair_order(request):
+    
+    fichas = Ficha_ingreso.objects.all()
     data = {
-        "form1" : form1,
-        "detalles" : detalles
+        "fichas" : fichas
     }
-    return render(request, "app/generate-repair-order.html", data)
+    return render(request, "app/list-repair-order.html", data)
 
 @login_required()
 def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
@@ -420,7 +417,7 @@ def render_pdf_view(request, rut, patente, ficha_id, desc, total, totalFinal):
         }
         html = template.render(context)
         response = HttpResponse(content_type='application/pdf')
-        #response['Content-Disposition'] = f'attachment; filename="{rut}_{patente}_{ficha_id}.pdf"'
+        # response['Content-Disposition'] = f'attachment; filename="{rut}_{patente}_{ficha_id}.pdf"'
         pisa_status = pisa.CreatePDF(html, dest=response)
         return response
     except:
